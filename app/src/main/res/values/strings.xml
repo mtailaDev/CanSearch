@@ -2,7 +2,6 @@
     <string name="app_name">CanSearch</string>
 
     <!--// onboarding-->
-    <String name="onboarding_skip">Skip</String>
     <string name="onboarding_welcome_title">About us</string>
     <string name="onboarding_welcome_description">ScanSearch is a non-profit App that aids cancer patients in finding clinical trials world-wide</string>
     <string name="onboarding_search_title">Search</string>

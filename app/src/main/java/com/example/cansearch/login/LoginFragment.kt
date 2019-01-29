@@ -5,11 +5,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import com.example.cansearch.R
+import com.example.cansearch.login.ui.OnboardingViewPagerAdapter
+import kotlinx.android.synthetic.main.fragment_login.*
 
-class LoginFragment : Fragment(){
+class LoginFragment : Fragment() {
 
     companion object {
-        fun newInstance() : LoginFragment {
+        fun newInstance(): LoginFragment {
             return LoginFragment()
         }
     }
@@ -20,7 +23,12 @@ class LoginFragment : Fragment(){
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return super.onCreateView(inflater, container, savedInstanceState)
+        return inflater.inflate(R.layout.fragment_login, container, false)
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        login_vp_onboarding.adapter = OnboardingViewPagerAdapter(fragmentManager!!, context!!)
     }
 
 
