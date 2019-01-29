@@ -1,3 +1,14 @@
 <resources>
     <string name="app_name">CanSearch</string>
+
+    <!--// onboarding-->
+    <String name="onboarding_skip">Skip</String>
+    <string name="onboarding_welcome_title">About us</string>
+    <string name="onboarding_welcome_description">ScanSearch is a non-profit App that aids cancer patients in finding clinical trials world-wide</string>
+    <string name="onboarding_search_title">Search</string>
+    <string name="onboarding_search_description">With CanSearch, you can make a generic or specified search using key words such as disease subtype, gender, or your location</string>
+    <string name="onboarding_archive_title">Archive</string>
+    <string name="onboarding_archive_description">Because of the extensive list of clinical trials, CanSearch allows you to store those of interest to you to save you the hassle of finding them again</string>
+    <string name="onboarding_contact_title">Contact</string>
+    <string name="onboarding_contact_description">For clinical trials that provide contact information, you can easily Email or Phone the Director of Research for trials of interest</string>
 </resources>
