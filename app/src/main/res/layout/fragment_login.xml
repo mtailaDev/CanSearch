@@ -8,8 +8,37 @@
     <androidx.viewpager.widget.ViewPager
             android:id="@+id/login_vp_onboarding"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
-    </androidx.viewpager.widget.ViewPager>
+            android:layout_height="match_parent"/>
+
+    <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/login_gd_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.22"/>
+
+    <ImageView
+            android:id="@+id/login_iv_icon"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            app:layout_constraintBottom_toTopOf="@+id/login_gd_title"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginStart="16dp"
+            android:background="@android:color/white"
+            android:elevation="1dp"/>
+
+    <TextView
+            android:id="@+id/onboarding_tv_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="@+id/login_iv_icon"
+            app:layout_constraintStart_toEndOf="@+id/login_iv_icon"
+            android:layout_marginStart="16dp"
+            android:textColor="@android:color/white"
+            android:textSize="32sp"
+            android:gravity="bottom"
+            android:text="CanSearch"
+            android:elevation="1dp"/>
 
 
     <TextView
