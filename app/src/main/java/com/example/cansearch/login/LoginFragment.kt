@@ -29,6 +29,7 @@ class LoginFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         login_vp_onboarding.adapter = OnboardingViewPagerAdapter(fragmentManager!!, context!!)
+        login_vp_indicator.setViewPager(login_vp_onboarding)
     }
 
 
