@@ -40,27 +40,13 @@
             android:text="CanSearch"
             android:elevation="1dp"/>
 
-    <TextView
-            android:id="@+id/login_tv_skip"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginEnd="16dp"
-            android:layout_marginBottom="16dp"
-            android:textColor="@android:color/white"
-            android:textSize="32sp"
-            android:gravity="bottom"
-            android:text="Skip"
-            android:elevation="1dp"
-            android:padding="8dp"/>
 
     <com.tbuonomo.viewpagerdotsindicator.DotsIndicator
             android:id="@+id/login_vp_indicator"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toTopOf="@+id/login_tv_skip"
-            app:layout_constraintBottom_toBottomOf="@+id/login_tv_skip"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginBottom="40dp"
             app:layout_constraintStart_toStartOf="parent"
             android:layout_marginStart="16dp"
             app:dotsColor="@android:color/white"
