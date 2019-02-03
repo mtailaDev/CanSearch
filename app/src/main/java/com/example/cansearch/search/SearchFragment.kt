@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.cansearch.R
 import com.example.cansearch.core.gone
+import com.example.cansearch.core.visible
 import com.example.cansearch.search.ui.QuickSearchAdapter
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.fragment_search.*
@@ -52,6 +53,7 @@ class SearchFragment : Fragment() {
         search_tv_results_title.text = resources.getString(R.string.search_status_searching)
         search_rv_quick_search.gone()
         search_btn.gone()
+        search_lottie_searching.visible()
     }
 
     private fun showErrorMessage(view: View) {

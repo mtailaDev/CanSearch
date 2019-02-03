@@ -106,6 +106,19 @@
             app:layout_constraintTop_toBottomOf="@+id/search_tv_results_title"
             app:layout_constraintBottom_toBottomOf="parent"/>
 
+    <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/search_lottie_searching"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/search_tv_results_title"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:lottie_autoPlay="true"
+            app:lottie_loop="true"
+            app:lottie_fileName="searching_lottie.json"
+            android:visibility="gone"/>
+
     <com.google.android.material.button.MaterialButton
             android:id="@+id/search_btn"
             style="@style/AppTheme.RoundedCornerMaterialButton"
