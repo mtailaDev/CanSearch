@@ -10,4 +10,16 @@
     <string name="onboarding_archive_description">Because of the extensive list of clinical trials, CanSearch allows you to store those of interest to you to save you the hassle of finding them again</string>
     <string name="onboarding_contact_title">Contact</string>
     <string name="onboarding_contact_description">For clinical trials that provide contact information, you can easily Email or Phone the Director of Research for trials of interest</string>
+
+    <!--// search fragment-->
+    <string-array name="quickSearch">
+        <item>Non-Melanoma Skin Cancer</item>
+        <item>Lung Cancer</item>
+        <item>Breast Cancer</item>
+        <item>Prostate Cancer</item>
+        <item>Colorectal Cancer</item>
+        <item>Bladder Cancer</item>
+        <item>Cutaneous Melanoma</item>
+        <item>Non-Hodgkin Lymphoma</item>
+    </string-array>
 </resources>
