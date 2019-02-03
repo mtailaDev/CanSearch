@@ -22,7 +22,7 @@ class SearchFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setupQuickSearchRecyclerView()
-        setOnClickListners()
+        setOnClickListeners()
     }
 
     private fun setupQuickSearchRecyclerView() {
@@ -31,7 +31,7 @@ class SearchFragment : Fragment() {
         search_rv_quick_search.layoutManager = LinearLayoutManager(context)
     }
 
-    private fun setOnClickListners() {
+    private fun setOnClickListeners() {
         search_iv_icon.setOnClickListener {
             if (!search_et_value.text.toString().isNullOrEmpty()) {
                 showSearchingStatus()
