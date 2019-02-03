@@ -54,6 +54,10 @@ class SearchFragment : Fragment() {
         search_rv_quick_search.gone()
         search_btn.gone()
         search_lottie_searching.visible()
+        // maybe a bit hacky - but use this to prevent
+        search_lottie_searching.setOnTouchListener { v, event ->
+            return@setOnTouchListener true
+        }
     }
 
     private fun showErrorMessage(view: View) {
