@@ -51,6 +51,7 @@ class SearchFragment : Fragment() {
     private fun showSearchingStatus() {
         search_tv_results_title.text = resources.getString(R.string.search_status_searching)
         search_rv_quick_search.gone()
+        search_btn.gone()
     }
 
     private fun showErrorMessage(view: View) {
