@@ -14,7 +14,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             android:layout_marginTop="8dp"
-            android:layout_marginStart="16dp"/>
+            android:layout_marginStart="16dp" android:fontFamily="@font/sanchez"/>
 
     <View
             android:id="@+id/quick_search_line_break"
