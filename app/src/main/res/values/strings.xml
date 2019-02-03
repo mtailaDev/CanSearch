@@ -21,19 +21,24 @@
         <item>Bladder Cancer</item>
         <item>Cutaneous Melanoma</item>
         <item>Non-Hodgkin Lymphoma</item>
-        <item>Non-Hodgkin Lymphoma</item>
-        <item>Non-Hodgkin Lymphoma</item>
-        <item>Non-Hodgkin Lymphoma</item>
-        <item>Non-Hodgkin Lymphoma</item>
-        <item>Non-Hodgkin Lymphoma</item>
-        <item>Non-Hodgkin Lymphoma</item>
-        <item>Non-Hodgkin Lymphoma</item>
-        <item>Non-Hodgkin Lymphoma</item>
-        <item>Non-Hodgkin Lymphoma</item>
-        <item>Non-Hodgkin Lymphoma</item>
-        <item>Non-Hodgkin Lymphoma</item>
-        <item>Non-Hodgkin Lymphoma</item>
-        <item>Non-Hodgkin Lymphoma</item>
+        <item>Non-Melanoma Skin Cancer</item>
+        <item>Lung Cancer</item>
+        <item>Breast Cancer</item>
+        <item>Prostate Cancer</item>
+        <item>Colorectal Cancer</item>
+        <item>Bladder Cancer</item>
+        <item>Cutaneous Melanoma</item>
+        <item>Non-Melanoma Skin Cancer</item>
+        <item>Lung Cancer</item>
+        <item>Breast Cancer</item>
+        <item>Prostate Cancer</item>
+        <item>Colorectal Cancer</item>
+        <item>Bladder Cancer</item>
+        <item>Cutaneous Melanoma</item>
         <item>Non-Hodgkin Lymphoma</item>
     </string-array>
+
+    <string name="search_status_quick_search">Quick Search</string>
+    <string name="search_status_searching">Searching</string>
+
 </resources>

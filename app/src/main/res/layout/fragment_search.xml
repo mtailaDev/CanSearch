@@ -91,7 +91,7 @@
             android:paddingBottom="8dp"
             android:paddingStart="16dp"
             android:paddingEnd="16dp"
-            android:text="Quick Search"
+            android:text="@string/search_status_quick_search"
             android:background="@color/line_break"
             android:textColor="@android:color/black"
             android:textSize="18sp"
@@ -124,7 +124,6 @@
             app:cornerRadius="20dp"
             android:elevation="1dp"
             android:fontFamily="@font/sanchez"/>
-
 
 
 </androidx.constraintlayout.motion.widget.MotionLayout>

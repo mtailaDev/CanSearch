@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.cansearch.R
+import com.example.cansearch.core.gone
 import com.example.cansearch.search.ui.QuickSearchAdapter
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.fragment_search.*
@@ -32,18 +33,24 @@ class SearchFragment : Fragment() {
     private fun setOnClickListners() {
         search_iv_icon.setOnClickListener {
             if (!search_et_value.text.toString().isNullOrEmpty()) {
-                // todo - make api call
+                showSearchingStatus()
+
             } else {
                 showErrorMessage(it)
             }
         }
         search_btn.setOnClickListener {
             if (!search_et_value.text.toString().isNullOrEmpty()) {
-                // todo - make api call
+                showSearchingStatus()
             } else {
                 showErrorMessage(it)
             }
         }
+    }
+
+    private fun showSearchingStatus() {
+        search_tv_results_title.text = resources.getString(R.string.search_status_searching)
+        search_rv_quick_search.gone()
     }
 
     private fun showErrorMessage(view: View) {
