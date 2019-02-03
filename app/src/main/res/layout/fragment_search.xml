@@ -15,7 +15,9 @@
             app:layout_constraintEnd_toEndOf="parent"
             android:background="@drawable/background_search_gradient"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="@+id/collapsed_background_guide"/>
+            app:layout_constraintBottom_toBottomOf="@+id/collapsed_background_guide"
+            android:focusedByDefault="true"
+            android:focusableInTouchMode="true"/>
 
     <TextView
             android:id="@+id/search_tv_title"
@@ -39,7 +41,9 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/search_tv_title"
-            android:background="@android:color/white"/>
+            android:background="@android:color/white"
+            android:focusedByDefault="false"
+            android:focusableInTouchMode="false"/>
 
     <View
             android:id="@+id/collapsed_background_guide"
@@ -74,7 +78,6 @@
             android:elevation="2dp"
             android:background="@android:color/transparent"
             android:layout_marginStart="8dp"
-            android:text="Cutaneous Melanoma"
             android:fontFamily="@font/sanchez"/>
 
     <TextView
