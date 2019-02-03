@@ -60,6 +60,7 @@
             app:layout_constraintTop_toTopOf="@+id/search_value_container"
             app:layout_constraintBottom_toBottomOf="@+id/search_value_container"
             android:src="@drawable/ic_search_black_24dp"
+            android:padding="8dp"
             android:elevation="2dp"/>
 
     <EditText
