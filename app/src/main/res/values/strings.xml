@@ -40,5 +40,6 @@
 
     <string name="search_status_quick_search">Quick Search</string>
     <string name="search_status_searching">Searching</string>
+    <string name="search_status_results">Results</string>
 
 </resources>
