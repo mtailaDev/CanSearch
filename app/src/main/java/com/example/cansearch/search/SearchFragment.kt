@@ -10,6 +10,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.cansearch.R
 import com.example.cansearch.core.gone
 import com.example.cansearch.core.visible
+import com.example.cansearch.search.data.SearchApiService
+import com.example.cansearch.search.di.SearchDagger
 import com.example.cansearch.search.ui.QuickSearchAdapter
 import com.example.cansearch.search.ui.SearchResultsAdapter
 import com.google.android.material.snackbar.Snackbar
@@ -18,11 +20,27 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.fragment_search.*
 import java.util.concurrent.TimeUnit
+import javax.inject.Inject
 
 class SearchFragment : Fragment() {
 
+    lateinit var service: SearchApiService
+    @Inject set
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        SearchDagger.component.inject(this)
+        service.getTransactions().subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe({
+                Log.i("ASDAD", it.string())
+            },{
+                Log.i("ASDAD", "ASDD")
+            })
+    }
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.fragment_search, container, false)
+        return inflater.inflate(com.example.cansearch.R.layout.fragment_search, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
