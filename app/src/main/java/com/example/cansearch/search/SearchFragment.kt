@@ -25,7 +25,7 @@ import javax.inject.Inject
 class SearchFragment : Fragment() {
 
     lateinit var service: SearchApiService
-    @Inject set
+        @Inject set
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,8 +33,10 @@ class SearchFragment : Fragment() {
         service.getTransactions().subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({
-                Log.i("ASDAD", it.string())
-            },{
+                it.trials.forEach {
+                    Log.i("Trial id", it.nciID)
+                }
+            }, {
                 Log.i("ASDAD", "ASDD")
             })
     }
