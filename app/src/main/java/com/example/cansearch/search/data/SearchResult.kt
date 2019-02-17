@@ -170,12 +170,12 @@ data class SearchResult(
             )
         }
 
-        private fun mapToSearchListItem(): SearchListItem {
+        fun mapToSearchListItem(): SearchListItem {
             return SearchListItem(
                 briefTitle = this.briefTitle,
                 principleInvestigator = this.principalInvestigator,
                 leadOrganization = this.leadOrganization,
-                phase = this.phase.phase,
+                phase = "Phase: " + this.phase.phase,
                 totalSites = "${this.sites.size} locations"
             )
         }

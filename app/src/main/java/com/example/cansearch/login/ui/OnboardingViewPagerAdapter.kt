@@ -14,7 +14,7 @@ class OnboardingViewPagerAdapter(val fragmentManager: FragmentManager, val conte
         return NUM_ITEMS
     }
 
-    override fun getItem(position: Int): Fragment? {
+    override fun getItem(position: Int): Fragment {
         when (position) {
             0 -> return OnboardingFragment.newInstance(
                 OnboardingUI(
@@ -44,7 +44,13 @@ class OnboardingViewPagerAdapter(val fragmentManager: FragmentManager, val conte
                     context.getString(R.string.onboarding_contact_description)
                 )
             )
-            else -> return null
+            else -> return OnboardingFragment.newInstance(
+                    OnboardingUI(
+                        R.drawable.background_contact_gradient,
+                        context.getString(R.string.onboarding_contact_title),
+                        context.getString(R.string.onboarding_contact_description)
+                    )
+            )
         }
     }
 
