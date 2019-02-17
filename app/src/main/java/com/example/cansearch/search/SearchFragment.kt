@@ -1,5 +1,6 @@
 package com.example.cansearch.search
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -13,8 +14,10 @@ import com.example.cansearch.core.visible
 import com.example.cansearch.search.data.SearchApiService
 import com.example.cansearch.search.di.SearchDagger
 import com.example.cansearch.search.ui.QuickSearchAdapter
+import com.example.cansearch.search.ui.SearchListItem
 import com.example.cansearch.search.ui.SearchResultsAdapter
 import com.google.android.material.snackbar.Snackbar
+import io.reactivex.Observable
 import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
@@ -22,23 +25,42 @@ import kotlinx.android.synthetic.main.fragment_search.*
 import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
-class SearchFragment : Fragment() {
+class SearchFragment : Fragment(), SearchResultsAdapter.onArchiveClickHandler {
 
     lateinit var service: SearchApiService
         @Inject set
 
+
+    @SuppressLint("CheckResult")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         SearchDagger.component.inject(this)
-        service.getTransactions().subscribeOn(Schedulers.io())
+        service.getTransactions()
+            .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
-            .subscribe({
-                it.trials.forEach {
-                    Log.i("Trial id", it.nciID)
-                }
+            .flatMap { results ->
+                Observable.fromIterable(results.trials)
+                    .map { trials -> trials.mapToSearchListItem() }
+                    .toList()
+            }
+            .subscribe({ trials ->
+                showResultsRecyclerView(trials)
             }, {
                 Log.i("ASDAD", "ASDD")
             })
+    }
+
+    override fun onArchive() : Boolean{
+        return true
+    }
+
+    private fun showResultsRecyclerView(trials: List<SearchListItem>) {
+        search_tv_results_title.text = resources.getString(R.string.search_status_results)
+        search_lottie_searching.gone()
+        search_rv_quick_search.visible()
+        search_rv_quick_search.adapter = SearchResultsAdapter(trials, this)
+        search_rv_quick_search.layoutManager = LinearLayoutManager(context)
+
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -94,11 +116,11 @@ class SearchFragment : Fragment() {
                 search_lottie_searching.gone()
                 search_rv_quick_search.visible()
                 search_btn.visible()
-                search_rv_quick_search.adapter =
-                    SearchResultsAdapter(resources.getStringArray(R.array.quickSearch).toList())
-                search_rv_quick_search.layoutManager = LinearLayoutManager(context)
+//                search_rv_quick_search.adapter =
+//                    SearchResultsAdapter(resources.getStringArray(R.array.quickSearch).toList())
+//                search_rv_quick_search.layoutManager = LinearLayoutManager(context)
             }
-            .subscribe()
+//            .subscribe()
 
     }
 
