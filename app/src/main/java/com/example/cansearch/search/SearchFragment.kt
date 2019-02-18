@@ -8,9 +8,11 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.cansearch.MainActivity
 import com.example.cansearch.R
 import com.example.cansearch.core.gone
 import com.example.cansearch.core.visible
+import com.example.cansearch.home.HomeActivity
 import com.example.cansearch.search.data.SearchApiService
 import com.example.cansearch.search.di.SearchDagger
 import com.example.cansearch.search.ui.QuickSearchAdapter
@@ -50,8 +52,13 @@ class SearchFragment : Fragment(), SearchResultsAdapter.onArchiveClickHandler {
             })
     }
 
-    override fun onArchive() : Boolean{
+    override fun onArchive(): Boolean {
         return true
+    }
+
+    override fun onTrialSelected() {
+        val x = activity as HomeActivity
+        x.showtrial()
     }
 
     private fun showResultsRecyclerView(trials: List<SearchListItem>) {
