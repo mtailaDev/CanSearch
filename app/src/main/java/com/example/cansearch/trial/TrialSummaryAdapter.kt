@@ -30,7 +30,7 @@ class TrialSummaryAdapter(private val trialSummaryList: ArrayList<TrialSummaryIt
             itemView.trial_item_title.text = quickSearchTitle.summaryTitle
             itemView.trial_item_value.text = quickSearchTitle.summaryValue
             if (quickSearchTitle.highlight)
-                itemView.trial_item_value.setTextColor(itemView.context.getColorCompat(R.color.colorPrimary))
+                itemView.trial_item_value.setTextColor(itemView.context.getColorCompat(R.color.title_text_tertiary))
             else
                 itemView.trial_item_value.setTextColor(itemView.context.getColorCompat(R.color.title_text_primary))
 
