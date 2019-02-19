@@ -6,10 +6,10 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import com.example.cansearch.R
 import com.example.cansearch.core.getColorCompat
 import com.google.android.material.chip.Chip
-import kotlinx.android.synthetic.main.disease_synonyms_compound.view.*
+import kotlinx.android.synthetic.main.associated_disease_info_compound.view.*
 
 
-class DiseaseCompoundView @JvmOverloads constructor(
+class AssociatedDiseaseInfoCompoundView @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
     defStyleAttr: Int = 0
@@ -17,21 +17,20 @@ class DiseaseCompoundView @JvmOverloads constructor(
     ConstraintLayout(context, attrs, defStyleAttr) {
 
     init {
-        inflate(context, R.layout.disease_synonyms_compound, this)
+        inflate(context, R.layout.associated_disease_info_compound, this)
     }
 
-    override fun onFinishInflate() {
-        super.onFinishInflate()
+    fun setCardTitle(cardTitle: String) {
+        chips_card_title.text = cardTitle
+    }
 
-        // todo -
-        // disease.prefferedName.forEach{}
-        for (i in 1..8) {
+    fun setChipGroup(chipColor: Int, chipTitles: List<String>) {
+        for (title in chipTitles) {
             val chip = Chip(context)
-            chip.setChipBackgroundColorResource(R.color.colorPrimary)
+            chip.setChipBackgroundColorResource(chipColor)
             chip.setTextColor(context.getColorCompat(android.R.color.white))
-            chip.text = "Item ${i}"
+            chip.text = title
             disease_chip_group.addView(chip)
         }
     }
-
 }
