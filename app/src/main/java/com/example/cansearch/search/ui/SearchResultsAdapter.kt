@@ -30,7 +30,7 @@ class SearchResultsAdapter(
         viewHolder.setData(searchResults[position])
 
         viewHolder.itemView.search_results_parent.setOnClickListener {
-            Log.i("ASDASD", "ASDASD")
+            archiveListener.onTrialSelected()
         }
 
         viewHolder.itemView.search_result_archive_icon.setOnClickListener {
@@ -90,5 +90,6 @@ class SearchResultsAdapter(
 
     interface onArchiveClickHandler {
         fun onArchive(): Boolean
+        fun onTrialSelected()
     }
 }

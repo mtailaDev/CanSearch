@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="8dp">
+
+    <TextView
+            android:id="@+id/trial_summary_card_title"
+            style="@style/TrialContainerTitle"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:text="Study Summary"/>
+
+    <View
+            android:id="@+id/trial_summary_title_divider"
+            style="@style/TrialContainerTitleDivider"
+            app:layout_constraintStart_toStartOf="@+id/trial_summary_card_title"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/trial_summary_card_title"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/trial_summary_recycler_view"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/trial_summary_title_divider"/>
+
+    <com.google.android.material.button.MaterialButton
+            android:id="@+id/study_summary_scientific_detail_btn"
+            style="@style/PrimaryButton"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/trial_summary_recycler_view"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:text="Locations"/>
+
+    <TextView
+            android:id="@+id/trial_summary_locations_total"
+            style="@style/TrialContainerTitle"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/study_summary_scientific_detail_btn"
+            app:layout_constraintBottom_toBottomOf="@+id/study_summary_scientific_detail_btn"
+            android:text="131 Locations"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+

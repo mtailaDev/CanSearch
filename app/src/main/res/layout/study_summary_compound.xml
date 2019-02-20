@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="8dp">
+
+    <com.google.android.material.card.MaterialCardView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_margin="16dp"
+            android:elevation="2dp"
+            app:cardCornerRadius="8dp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+            <TextView
+                    android:id="@+id/study_summary_card_title"
+                    style="@style/TrialContainerTitle"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:text="Study Summary"/>
+
+            <View
+                    android:id="@+id/study_summary_title_divider"
+                    style="@style/TrialContainerTitleDivider"
+                    app:layout_constraintStart_toStartOf="@+id/study_summary_card_title"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/study_summary_card_title"/>
+
+            <TextView
+                    android:id="@+id/study_summary_study_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintStart_toStartOf="@+id/study_summary_card_title"
+                    app:layout_constraintTop_toBottomOf="@+id/study_summary_title_divider"
+                    android:layout_marginTop="8dp"
+                    android:text="Study Title"
+                    android:textColor="@color/title_text_primary"
+                    android:textSize="14sp"/>
+
+            <TextView
+                    android:id="@+id/study_summary_title"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintStart_toStartOf="@+id/study_summary_card_title"
+                    app:layout_constraintTop_toBottomOf="@+id/study_summary_study_title"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_marginTop="8dp"
+                    android:text="Crizotinib in Treating Patients with Stage IB-IIIA Non-small Cell Lung Cancer That Has Been Removed by Surgery and ALK Fusion Mutations (An ALCHEMIST Treatment Trial)"
+                    android:textColor="@color/title_text_primary"
+                    android:textSize="12sp"/>
+
+            <TextView
+                    android:id="@+id/study_summary_description_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintStart_toStartOf="@+id/study_summary_card_title"
+                    app:layout_constraintTop_toBottomOf="@+id/study_summary_title"
+                    android:layout_marginTop="8dp"
+                    android:text="Description"
+                    android:textColor="@color/title_text_primary"
+                    android:textSize="14sp"/>
+
+            <TextView
+                    android:id="@+id/study_summary_description"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintStart_toStartOf="@+id/study_summary_card_title"
+                    app:layout_constraintTop_toBottomOf="@+id/study_summary_description_title"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_marginTop="8dp"
+                    android:text="This phase III ALCHEMIST trial studies how well crizotinib works in treating patients with stage IB-IIIA non-small cell lung cancer that has been removed by surgery and has a mutation in a protein called anaplastic lymphoma kinase (ALK). Mutations, or changes, in ALK can make it very active and important for tumor cell growth and progression. Crizotinib may stop the growth of tumor cells by blocking the ALK protein from working. Crizotinib may be an effective treatment for patients with non-small cell lung cancer and an ALK fusion mutation."
+                    android:textColor="@color/title_text_primary"
+                    android:textSize="12sp"/>
+
+            <com.google.android.material.button.MaterialButton
+                    android:id="@+id/study_summary_scientific_detail_btn"
+                    style="@style/PrimaryButton"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/study_summary_description"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    android:text="Scientific Details"/>
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
