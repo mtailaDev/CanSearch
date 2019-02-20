@@ -14,15 +14,18 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-        <com.example.cansearch.trial.StudySummaryCompoundView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
+        <com.google.android.material.card.MaterialCardView
+                style="@style/TrialCardView"
+                android:focusableInTouchMode="true">
+
+            <com.example.cansearch.trial.StudySummaryCompoundView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"/>
+
+        </com.google.android.material.card.MaterialCardView>
 
         <com.google.android.material.card.MaterialCardView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:cardCornerRadius="8dp"
-                android:layout_margin="16dp">
+                style="@style/TrialCardView">
 
             <com.example.cansearch.trial.TrialSummaryCompoundView
                     android:id="@+id/trial_summary"
@@ -32,10 +35,7 @@
         </com.google.android.material.card.MaterialCardView>
 
         <com.google.android.material.card.MaterialCardView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:cardCornerRadius="8dp"
-                android:layout_margin="16dp">
+                style="@style/TrialCardView">
 
             <com.example.cansearch.trial.AssociatedDiseaseInfoCompoundView
                     android:id="@+id/trial_disease"
@@ -45,10 +45,7 @@
         </com.google.android.material.card.MaterialCardView>
 
         <com.google.android.material.card.MaterialCardView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:cardCornerRadius="8dp"
-                android:layout_margin="16dp">
+                style="@style/TrialCardView">
 
             <com.example.cansearch.trial.AssociatedDiseaseInfoCompoundView
                     android:id="@+id/trial_associated_genes"
@@ -58,10 +55,8 @@
         </com.google.android.material.card.MaterialCardView>
 
         <com.google.android.material.card.MaterialCardView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:cardCornerRadius="8dp"
-                android:layout_margin="16dp">
+                style="@style/TrialCardView"
+                android:layout_marginBottom="16dp">
 
             <com.example.cansearch.trial.EligibilityCompoundView
                     android:id="@+id/trial_eligibility"
