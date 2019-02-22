@@ -4,9 +4,8 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.example.cansearch.R
-import com.example.cansearch.search.SearchFragment
-import com.example.cansearch.trial.data.DetailedTrial
-import com.example.cansearch.trial.ui.TrialActivity
+import com.example.cansearch.search.ui.screens.SearchFragment
+import com.example.cansearch.search.ui.screens.TrialActivity
 
 class HomeActivity : AppCompatActivity(){
 
@@ -18,7 +17,7 @@ class HomeActivity : AppCompatActivity(){
         ft.commit()
     }
 
-    fun showtrial(trial: DetailedTrial) {
+    fun showtrial() {
         startActivity(Intent(this, TrialActivity::class.java))
     }
 }

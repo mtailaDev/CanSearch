@@ -18,7 +18,7 @@
                 style="@style/TrialCardView"
                 android:focusableInTouchMode="true">
 
-            <com.example.cansearch.trial.ui.StudySummaryCompoundView
+            <com.example.cansearch.search.ui.widgets.StudySummaryCompoundView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"/>
 
@@ -27,7 +27,7 @@
         <com.google.android.material.card.MaterialCardView
                 style="@style/TrialCardView">
 
-            <com.example.cansearch.trial.ui.TrialSummaryCompoundView
+            <com.example.cansearch.search.ui.widgets.TrialSummaryCompoundView
                     android:id="@+id/trial_summary"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"/>
@@ -37,7 +37,7 @@
         <com.google.android.material.card.MaterialCardView
                 style="@style/TrialCardView">
 
-            <com.example.cansearch.trial.ui.AssociatedDiseaseInfoCompoundView
+            <com.example.cansearch.search.ui.widgets.AssociatedDiseaseInfoCompoundView
                     android:id="@+id/trial_disease"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"/>
@@ -47,7 +47,7 @@
         <com.google.android.material.card.MaterialCardView
                 style="@style/TrialCardView">
 
-            <com.example.cansearch.trial.ui.AssociatedDiseaseInfoCompoundView
+            <com.example.cansearch.search.ui.widgets.AssociatedDiseaseInfoCompoundView
                     android:id="@+id/trial_associated_genes"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"/>
@@ -58,7 +58,7 @@
                 style="@style/TrialCardView"
                 android:layout_marginBottom="16dp">
 
-            <com.example.cansearch.trial.ui.EligibilityCompoundView
+            <com.example.cansearch.search.ui.widgets.EligibilityCompoundView
                     android:id="@+id/trial_eligibility"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"/>

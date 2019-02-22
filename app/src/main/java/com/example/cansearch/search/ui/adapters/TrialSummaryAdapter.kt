@@ -1,4 +1,4 @@
-package com.example.cansearch.trial.ui
+package com.example.cansearch.search.ui.adapters
 
 import android.view.LayoutInflater
 import android.view.View
@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.cansearch.R
 import com.example.cansearch.core.getColorCompat
+import com.example.cansearch.search.ui.TrialSummaryItem
 import kotlinx.android.synthetic.main.item_list_trial_summary.view.*
 
 
