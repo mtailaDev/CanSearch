@@ -12,6 +12,7 @@ import android.view.animation.AccelerateDecelerateInterpolator
 import android.view.animation.OvershootInterpolator
 import androidx.recyclerview.widget.RecyclerView
 import com.example.cansearch.R
+import com.example.cansearch.trial.data.DetailedTrial
 import kotlinx.android.synthetic.main.item_list_search.view.*
 
 class SearchResultsAdapter(
@@ -88,6 +89,7 @@ class SearchResultsAdapter(
         }
     }
 
+    // todo - rename this
     interface onArchiveClickHandler {
         fun onArchive(): Boolean
         fun onTrialSelected()
