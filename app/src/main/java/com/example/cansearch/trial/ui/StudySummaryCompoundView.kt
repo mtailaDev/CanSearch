@@ -1,4 +1,4 @@
-package com.example.cansearch.trial
+package com.example.cansearch.trial.ui
 
 import android.content.Context
 import android.util.AttributeSet

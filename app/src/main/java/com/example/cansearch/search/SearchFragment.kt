@@ -1,6 +1,7 @@
 package com.example.cansearch.search
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -8,7 +9,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.cansearch.MainActivity
 import com.example.cansearch.R
 import com.example.cansearch.core.gone
 import com.example.cansearch.core.visible
@@ -18,6 +18,7 @@ import com.example.cansearch.search.di.SearchDagger
 import com.example.cansearch.search.ui.QuickSearchAdapter
 import com.example.cansearch.search.ui.SearchListItem
 import com.example.cansearch.search.ui.SearchResultsAdapter
+import com.example.cansearch.trial.ui.TrialActivity
 import com.google.android.material.snackbar.Snackbar
 import io.reactivex.Observable
 import io.reactivex.Single
@@ -58,7 +59,8 @@ class SearchFragment : Fragment(), SearchResultsAdapter.onArchiveClickHandler {
 
     override fun onTrialSelected() {
         val x = activity as HomeActivity
-        x.showtrial()
+        startActivity(Intent(context, TrialActivity::class.java))
+//        x.showtrial()
     }
 
     private fun showResultsRecyclerView(trials: List<SearchListItem>) {

@@ -1,4 +1,4 @@
-package com.example.cansearch.trial
+package com.example.cansearch.trial.ui
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -66,7 +66,13 @@ class TrialFragment : Fragment() {
 
     private fun generateStubData(): ArrayList<TrialSummaryItem> {
         trialSummaryList.clear()
-        trialSummaryList.add(TrialSummaryItem("Principle Investigator", "Dr. Matt Taila", false))
+        trialSummaryList.add(
+            TrialSummaryItem(
+                "Principle Investigator",
+                "Dr. Matt Taila",
+                false
+            )
+        )
         trialSummaryList.add(TrialSummaryItem("Lead Organization", "TGen", false))
         trialSummaryList.add(TrialSummaryItem("Phase", "III", true))
         trialSummaryList.add(TrialSummaryItem("Activity Status", "Active", true))

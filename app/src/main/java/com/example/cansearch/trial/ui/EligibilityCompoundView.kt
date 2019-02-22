@@ -1,4 +1,4 @@
-package com.example.cansearch.trial
+package com.example.cansearch.trial.ui
 
 import android.content.Context
 import android.util.AttributeSet
@@ -27,11 +27,11 @@ class EligibilityCompoundView @JvmOverloads constructor(
         eligibility_recycler_view.layoutManager = LinearLayoutManager(context)
     }
 
-    private fun generateStubData(): List<TrialEligibility> {
-        val eligibilityList = mutableListOf<TrialEligibility>()
-        eligibilityList.add(TrialEligibility("Sex", "Both"))
-        eligibilityList.add(TrialEligibility("Minimum Age", "18"))
-        eligibilityList.add(TrialEligibility("Maximum Age", "--"))
+    private fun generateStubData(): List<TrialEligibilityItem> {
+        val eligibilityList = mutableListOf<TrialEligibilityItem>()
+        eligibilityList.add(TrialEligibilityItem("Sex", "Both"))
+        eligibilityList.add(TrialEligibilityItem("Minimum Age", "18"))
+        eligibilityList.add(TrialEligibilityItem("Maximum Age", "--"))
         return eligibilityList
     }
 }

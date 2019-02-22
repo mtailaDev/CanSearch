@@ -1,6 +1,8 @@
 package com.example.cansearch.search.data
 
 import com.example.cansearch.search.ui.SearchListItem
+import com.example.cansearch.trial.data.DetailedTrial
+import com.example.cansearch.trial.ui.*
 import com.google.gson.annotations.SerializedName
 
 data class SearchResult(
@@ -170,14 +172,80 @@ data class SearchResult(
             )
         }
 
+        // todo hard coded values
         fun mapToSearchListItem(): SearchListItem {
             return SearchListItem(
-                briefTitle = this.briefTitle,
-                principleInvestigator = this.principalInvestigator,
-                leadOrganization = this.leadOrganization,
-                phase = "Phase: " + this.phase.phase,
-                totalSites = "${this.sites.size} locations"
+                briefTitle = briefTitle,
+                principleInvestigator = principalInvestigator,
+                leadOrganization = leadOrganization,
+                phase = "Phase: " + phase.phase,
+                totalSites = "${sites.size} locations"
             )
+        }
+
+        fun mapToDetailedTrial(): DetailedTrial {
+            return DetailedTrial(
+                studySummary = mapToStudySummary(),
+                trialSummary = mapToTrialSummary(),
+                associatedDiseases = mapToAssociatedDisease(),
+                associatedGenes = mapToAssociatedGenes(),
+                eligibility = mapToEligibility()
+            )
+        }
+
+        fun mapToStudySummary(): StudySummary {
+            return StudySummary(
+                briefTitle = briefTitle,
+                briefDescription = briefSummary,
+                scientificTitle = officialTitle,
+                scientificDescription = detailedSummary
+            )
+        }
+
+        // todo hard coded values
+         fun mapToTrialSummary(): TrialSummary {
+            val trialSummaryList = mutableListOf<TrialSummaryItem>()
+            trialSummaryList.add(TrialSummaryItem("Principle Investigator", principalInvestigator, false))
+            trialSummaryList.add(TrialSummaryItem("Lead Organization", leadOrganization, false))
+            trialSummaryList.add(TrialSummaryItem("Phase", phase.phase, true))
+            trialSummaryList.add(TrialSummaryItem("Activity Status", trialStatus, true))
+            trialSummaryList.add(TrialSummaryItem("Primary Purpose", primaryPurpose.phase, true))
+            trialSummaryList.add(TrialSummaryItem("Anatomic Site", "Breast", false))
+            return TrialSummary(trialSummaryList)
+        }
+
+        // todo hard coded values
+         fun mapToAssociatedDisease(): AssociatedDiseases {
+            val diseaseList = mutableListOf<String>()
+            diseaseList.add("Breast Cancer")
+            diseaseList.add("Malignant Neoplasm")
+            diseaseList.add("Other Disease")
+            diseaseList.add("Epithelial Neoplasm")
+            diseaseList.add("Malignant Breast Neoplasm")
+            diseaseList.add("HER2/Neu Status")
+            diseaseList.add("Bilateral Breast Carcinoma")
+            return AssociatedDiseases(diseaseList)
+        }
+
+        // todo hard coded values
+         fun mapToAssociatedGenes(): AssociatedGenes {
+            val list = mutableListOf<String>()
+            list.add("HER2")
+            list.add("P53")
+            list.add("NF1")
+            list.add("MAPK")
+            list.add("BRAF")
+            list.add("MERK")
+            return AssociatedGenes(list)
+        }
+
+        // todo hard coded values
+         fun mapToEligibility(): com.example.cansearch.trial.ui.Eligibility {
+            val eligibilities = mutableListOf<TrialEligibilityItem>()
+            eligibilities.add(TrialEligibilityItem("Gender", eligibility.structured.gender))
+            eligibilities.add(TrialEligibilityItem("Minimum Age", "${eligibility.structured.minAgeInYears}"))
+            eligibilities.add(TrialEligibilityItem("Max Age", "${eligibility.structured.maxAgeInYears}"))
+            return com.example.cansearch.trial.ui.Eligibility(eligibilities)
         }
     }
 }
