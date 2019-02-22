@@ -1,7 +1,7 @@
 package com.example.cansearch.search.di
 
 import com.example.cansearch.core.di.AppComponent
-import com.example.cansearch.search.SearchFragment
+import com.example.cansearch.search.ui.screens.SearchFragment
 import dagger.Component
 
 @Search

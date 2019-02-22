@@ -1,10 +1,12 @@
-package com.example.cansearch.trial
+package com.example.cansearch.search.ui.widgets
 
 import android.content.Context
 import android.util.AttributeSet
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.cansearch.R
+import com.example.cansearch.search.ui.TrialSummaryItem
+import com.example.cansearch.search.ui.adapters.TrialSummaryAdapter
 import kotlinx.android.synthetic.main.trials_summary_compound.view.*
 
 class TrialSummaryCompoundView @JvmOverloads constructor(

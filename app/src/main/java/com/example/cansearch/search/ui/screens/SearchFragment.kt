@@ -1,4 +1,4 @@
-package com.example.cansearch.search
+package com.example.cansearch.search.ui.screens
 
 import android.annotation.SuppressLint
 import android.os.Bundle
@@ -8,16 +8,15 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.cansearch.MainActivity
 import com.example.cansearch.R
 import com.example.cansearch.core.gone
 import com.example.cansearch.core.visible
 import com.example.cansearch.home.HomeActivity
 import com.example.cansearch.search.data.SearchApiService
 import com.example.cansearch.search.di.SearchDagger
-import com.example.cansearch.search.ui.QuickSearchAdapter
+import com.example.cansearch.search.ui.adapters.QuickSearchAdapter
 import com.example.cansearch.search.ui.SearchListItem
-import com.example.cansearch.search.ui.SearchResultsAdapter
+import com.example.cansearch.search.ui.adapters.SearchResultsAdapter
 import com.google.android.material.snackbar.Snackbar
 import io.reactivex.Observable
 import io.reactivex.Single
@@ -82,7 +81,8 @@ class SearchFragment : Fragment(), SearchResultsAdapter.onArchiveClickHandler {
 
     private fun setupQuickSearchRecyclerView() {
         val stringArray = resources.getStringArray(R.array.quickSearch)
-        search_rv_quick_search.adapter = QuickSearchAdapter(stringArray.toList())
+        search_rv_quick_search.adapter =
+            QuickSearchAdapter(stringArray.toList())
         search_rv_quick_search.layoutManager = LinearLayoutManager(context)
     }
 

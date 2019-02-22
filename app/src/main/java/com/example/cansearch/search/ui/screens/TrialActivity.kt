@@ -1,4 +1,4 @@
-package com.example.cansearch.trial
+package com.example.cansearch.search.ui.screens
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity

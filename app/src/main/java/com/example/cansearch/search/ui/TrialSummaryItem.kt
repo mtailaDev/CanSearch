@@ -1,3 +1,3 @@
-package com.example.cansearch.trial
+package com.example.cansearch.search.ui
 
 data class TrialSummaryItem(val summaryTitle: String, val summaryValue: String, val highlight: Boolean)

@@ -1,4 +1,4 @@
-package com.example.cansearch.trial
+package com.example.cansearch.search.ui.adapters
 
 import android.view.LayoutInflater
 import android.view.View
@@ -6,18 +6,19 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.cansearch.R
 import com.example.cansearch.core.getColorCompat
+import com.example.cansearch.search.ui.TrialSummaryItem
 import kotlinx.android.synthetic.main.item_list_trial_summary.view.*
 
 
 class TrialSummaryAdapter(private val trialSummaryList: ArrayList<TrialSummaryItem>) : RecyclerView.Adapter<TrialSummaryAdapter.ViewHolder>() {
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TrialSummaryAdapter.ViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val inflater = LayoutInflater.from(parent.context)
         val quickSearchView = inflater.inflate(R.layout.item_list_trial_summary, parent, false)
         return ViewHolder(quickSearchView)
     }
 
-    override fun onBindViewHolder(viewHolder: TrialSummaryAdapter.ViewHolder, position: Int) {
+    override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {
         viewHolder.setSummaryItem(trialSummaryList[position])
     }
 

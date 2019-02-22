@@ -5,7 +5,6 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.example.cansearch.home.HomeActivity
 import com.example.cansearch.login.LoginFragment
-import com.example.cansearch.trial.TrialActivity
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {

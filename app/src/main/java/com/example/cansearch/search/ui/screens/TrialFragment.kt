@@ -1,4 +1,4 @@
-package com.example.cansearch.trial
+package com.example.cansearch.search.ui.screens
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.example.cansearch.R
+import com.example.cansearch.search.ui.TrialSummaryItem
 import kotlinx.android.synthetic.main.fragment_trial.*
 
 class TrialFragment : Fragment() {
@@ -66,12 +67,24 @@ class TrialFragment : Fragment() {
 
     private fun generateStubData(): ArrayList<TrialSummaryItem> {
         trialSummaryList.clear()
-        trialSummaryList.add(TrialSummaryItem("Principle Investigator", "Dr. Matt Taila", false))
+        trialSummaryList.add(
+            TrialSummaryItem(
+                "Principle Investigator",
+                "Dr. Matt Taila",
+                false
+            )
+        )
         trialSummaryList.add(TrialSummaryItem("Lead Organization", "TGen", false))
         trialSummaryList.add(TrialSummaryItem("Phase", "III", true))
         trialSummaryList.add(TrialSummaryItem("Activity Status", "Active", true))
         trialSummaryList.add(TrialSummaryItem("Primary Purpose", "Treatment", true))
-        trialSummaryList.add(TrialSummaryItem("Anatomic Site", "Breast - female", false))
+        trialSummaryList.add(
+            TrialSummaryItem(
+                "Anatomic Site",
+                "Breast - female",
+                false
+            )
+        )
         return trialSummaryList
     }
 }

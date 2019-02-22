@@ -1,10 +1,12 @@
-package com.example.cansearch.trial
+package com.example.cansearch.search.ui.widgets
 
 import android.content.Context
 import android.util.AttributeSet
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.cansearch.R
+import com.example.cansearch.search.ui.TrialEligibility
+import com.example.cansearch.search.ui.adapters.TrialEligibilityAdapter
 import kotlinx.android.synthetic.main.eligibility_compound.view.*
 
 class EligibilityCompoundView @JvmOverloads constructor(
