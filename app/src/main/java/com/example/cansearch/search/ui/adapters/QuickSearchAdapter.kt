@@ -11,7 +11,6 @@ import kotlinx.android.synthetic.main.item_list_quick_search.view.*
 
 class QuickSearchAdapter(val quickSearchList: List<String>) : RecyclerView.Adapter<QuickSearchAdapter.ViewHolder>() {
 
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val inflater = LayoutInflater.from(parent.context)
         val quickSearchView = inflater.inflate(R.layout.item_list_quick_search, parent, false)

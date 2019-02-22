@@ -88,6 +88,7 @@ class SearchResultsAdapter(
         }
     }
 
+    // todo - rename this
     interface onArchiveClickHandler {
         fun onArchive(): Boolean
         fun onTrialSelected()
