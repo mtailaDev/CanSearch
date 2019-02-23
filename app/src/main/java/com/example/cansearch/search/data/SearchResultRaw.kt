@@ -1,11 +1,12 @@
 package com.example.cansearch.search.data
 
+import com.example.cansearch.search.domain.SearchResult
 import com.example.cansearch.search.ui.SearchListItem
-import com.example.cansearch.trial.data.DetailedTrial
-import com.example.cansearch.trial.ui.*
+import com.example.cansearch.trial.ui.TrialEligibilityItem
+import com.example.cansearch.trial.ui.TrialSummaryItem
 import com.google.gson.annotations.SerializedName
 
-data class SearchResult(
+data class SearchResultRaw(
     val total: Int,
     val trials: List<Trials>
 ) {
@@ -137,7 +138,10 @@ data class SearchResult(
             @SerializedName("org_coordinates")
             val orgCoordinates: OrgCoordinates
         ) {
-            data class OrgCoordinates(val lon: Double, val lat: Double)
+            data class OrgCoordinates(
+                val lon: Double,
+                val lat: Double
+            )
         }
 
         data class Eligibility(val structured: Structured) {
@@ -183,8 +187,9 @@ data class SearchResult(
             )
         }
 
-        fun mapToDetailedTrial(): DetailedTrial {
-            return DetailedTrial(
+        fun mapToSearchResult(): SearchResult {
+            return SearchResult(
+                id = nciID,
                 studySummary = mapToStudySummary(),
                 trialSummary = mapToTrialSummary(),
                 associatedDiseases = mapToAssociatedDisease(),
@@ -193,8 +198,8 @@ data class SearchResult(
             )
         }
 
-        fun mapToStudySummary(): StudySummary {
-            return StudySummary(
+        private fun mapToStudySummary(): SearchResult.StudySummary {
+            return SearchResult.StudySummary(
                 briefTitle = briefTitle,
                 briefDescription = briefSummary,
                 scientificTitle = officialTitle,
@@ -203,7 +208,7 @@ data class SearchResult(
         }
 
         // todo hard coded values
-         fun mapToTrialSummary(): TrialSummary {
+        private fun mapToTrialSummary(): SearchResult.TrialSummary {
             val trialSummaryList = mutableListOf<TrialSummaryItem>()
             trialSummaryList.add(TrialSummaryItem("Principle Investigator", principalInvestigator, false))
             trialSummaryList.add(TrialSummaryItem("Lead Organization", leadOrganization, false))
@@ -211,11 +216,11 @@ data class SearchResult(
             trialSummaryList.add(TrialSummaryItem("Activity Status", trialStatus, true))
             trialSummaryList.add(TrialSummaryItem("Primary Purpose", primaryPurpose.phase, true))
             trialSummaryList.add(TrialSummaryItem("Anatomic Site", "Breast", false))
-            return TrialSummary(trialSummaryList)
+            return SearchResult.TrialSummary(trialSummaryList)
         }
 
         // todo hard coded values
-         fun mapToAssociatedDisease(): AssociatedDiseases {
+        private fun mapToAssociatedDisease(): SearchResult.AssociatedDiseases {
             val diseaseList = mutableListOf<String>()
             diseaseList.add("Breast Cancer")
             diseaseList.add("Malignant Neoplasm")
@@ -224,11 +229,11 @@ data class SearchResult(
             diseaseList.add("Malignant Breast Neoplasm")
             diseaseList.add("HER2/Neu Status")
             diseaseList.add("Bilateral Breast Carcinoma")
-            return AssociatedDiseases(diseaseList)
+            return SearchResult.AssociatedDiseases(diseaseList)
         }
 
         // todo hard coded values
-         fun mapToAssociatedGenes(): AssociatedGenes {
+        private fun mapToAssociatedGenes(): SearchResult.AssociatedGenes {
             val list = mutableListOf<String>()
             list.add("HER2")
             list.add("P53")
@@ -236,16 +241,16 @@ data class SearchResult(
             list.add("MAPK")
             list.add("BRAF")
             list.add("MERK")
-            return AssociatedGenes(list)
+            return SearchResult.AssociatedGenes(list)
         }
 
         // todo hard coded values
-         fun mapToEligibility(): com.example.cansearch.trial.ui.Eligibility {
+        private fun mapToEligibility(): SearchResult.Eligibility {
             val eligibilities = mutableListOf<TrialEligibilityItem>()
             eligibilities.add(TrialEligibilityItem("Gender", eligibility.structured.gender))
             eligibilities.add(TrialEligibilityItem("Minimum Age", "${eligibility.structured.minAgeInYears}"))
             eligibilities.add(TrialEligibilityItem("Max Age", "${eligibility.structured.maxAgeInYears}"))
-            return com.example.cansearch.trial.ui.Eligibility(eligibilities)
+            return SearchResult.Eligibility(eligibilities)
         }
     }
 }
