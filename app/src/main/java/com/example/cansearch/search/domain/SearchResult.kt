@@ -1,10 +1,10 @@
-package com.example.cansearch.trial.data
-
+package com.example.cansearch.search.domain
 
 import com.example.cansearch.trial.ui.TrialEligibilityItem
 import com.example.cansearch.trial.ui.TrialSummaryItem
 
-data class DetailedTrial(
+data class SearchResult(
+    val id: String,
     val studySummary: StudySummary,
     val trialSummary: TrialSummary,
     val associatedDiseases: AssociatedDiseases,
@@ -18,6 +18,7 @@ data class DetailedTrial(
         val scientificDescription: String
     )
 
+    // this needs to be a key value map instead of a list
     data class TrialSummary(
         val summaryItems: MutableList<TrialSummaryItem>
     )
@@ -33,4 +34,15 @@ data class DetailedTrial(
     data class Eligibility(
         val eligibilityCriteria: MutableList<TrialEligibilityItem>
     )
+
+    private fun mapToSearchResultsSummary(): SearchResultSummary {
+        return SearchResultSummary(
+            id = id,
+            briefTitle = studySummary.briefTitle,
+            principleInvestigator = "Test",
+            leadOrganization = "Test",
+            phase = "Test",
+            totalSites = "123123"
+        )
+    }
 }
