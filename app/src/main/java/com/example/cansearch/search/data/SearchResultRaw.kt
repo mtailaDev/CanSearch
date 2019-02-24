@@ -1,10 +1,10 @@
 package com.example.cansearch.search.data
 
+import com.example.cansearch.App
+import com.example.cansearch.R
 import com.example.cansearch.search.domain.SearchScreen
-import com.example.cansearch.search.ui.SearchListItem
-import com.example.cansearch.trial.ui.TrialEligibilityItem
-import com.example.cansearch.trial.ui.TrialSummaryItem
 import com.example.cansearch.search.domain.SearchScreen.SearchResult
+import com.example.cansearch.search.ui.SearchListItem
 import com.google.gson.annotations.SerializedName
 
 data class SearchResultRaw(
@@ -211,14 +211,28 @@ data class SearchResultRaw(
 
         // todo hard coded values
         private fun mapToTrialSummary(): SearchResult.TrialSummary {
-            val trialSummaryList = mutableListOf<TrialSummaryItem>()
-            trialSummaryList.add(TrialSummaryItem("Principle Investigator", principalInvestigator, false))
-            trialSummaryList.add(TrialSummaryItem("Lead Organization", leadOrganization, false))
-            trialSummaryList.add(TrialSummaryItem("Phase", phase.phase, true))
-            trialSummaryList.add(TrialSummaryItem("Activity Status", trialStatus, true))
-            trialSummaryList.add(TrialSummaryItem("Primary Purpose", primaryPurpose.phase, true))
-            trialSummaryList.add(TrialSummaryItem("Anatomic Site", "Breast", false))
-            return SearchResult.TrialSummary(trialSummaryList)
+            val trialSummaryHashMap = HashMap<String, Pair<String, String>>()
+
+            trialSummaryHashMap[App.instance.getString(R.string.trial_summary_principle_investigator)] =
+                Pair(App.instance.getString(R.string.trial_summary_principle_investigator), principalInvestigator)
+
+            trialSummaryHashMap[App.instance.getString(R.string.trial_summary_lead_organization)] =
+                Pair(App.instance.getString(R.string.trial_summary_lead_organization), leadOrganization)
+
+            trialSummaryHashMap[App.instance.getString(R.string.trial_summary_phase)] =
+                Pair(App.instance.getString(R.string.trial_summary_phase), "Phase: ${phase.phase}")
+
+            trialSummaryHashMap[App.instance.getString(R.string.trial_summary_activity_status)] =
+                Pair(App.instance.getString(R.string.trial_summary_activity_status), trialStatus)
+
+            trialSummaryHashMap[App.instance.getString(R.string.trial_summary_primary_purpose)] =
+                Pair(App.instance.getString(R.string.trial_summary_primary_purpose), primaryPurpose.phase)
+
+            // todo - add this raw model
+            trialSummaryHashMap[App.instance.getString(R.string.trial_summary_anatomic_site)] =
+                Pair(App.instance.getString(R.string.trial_summary_anatomic_site), "Lung")
+
+            return SearchResult.TrialSummary(trialSummaryHashMap)
         }
 
         // todo hard coded values
@@ -248,11 +262,21 @@ data class SearchResultRaw(
 
         // todo hard coded values
         private fun mapToEligibility(): SearchResult.Eligibility {
-            val eligibilities = mutableListOf<TrialEligibilityItem>()
-            eligibilities.add(TrialEligibilityItem("Gender", eligibility.structured.gender))
-            eligibilities.add(TrialEligibilityItem("Minimum Age", "${eligibility.structured.minAgeInYears}"))
-            eligibilities.add(TrialEligibilityItem("Max Age", "${eligibility.structured.maxAgeInYears}"))
-            return SearchResult.Eligibility(eligibilities)
+
+            val trialEligibilityHashMap = HashMap<String, Pair<String, String>>()
+
+            trialEligibilityHashMap[App.instance.getString(R.string.trial_eligibility_gender)] =
+                Pair(App.instance.getString(R.string.trial_eligibility_gender), eligibility.structured.gender)
+
+            trialEligibilityHashMap[App.instance.getString(R.string.trial_eligibility_min_age)] =
+                Pair(App.instance.getString(R.string.trial_eligibility_gender), "${eligibility.structured.minAgeInYears}")
+
+            val maxAge = if (eligibility.structured.maxAgeInYears == 999) "NA" else "${eligibility.structured.maxAgeInYears}"
+
+            trialEligibilityHashMap[App.instance.getString(R.string.trial_eligibility_max_age)] =
+                Pair(App.instance.getString(R.string.trial_eligibility_max_age), maxAge)
+
+            return SearchResult.Eligibility(trialEligibilityHashMap)
         }
     }
 }
