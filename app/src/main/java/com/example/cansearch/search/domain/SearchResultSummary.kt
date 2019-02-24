@@ -8,6 +8,16 @@ data class SearchResultSummary(
     val phase: String,
     val totalSites: String
 ) {
-
+    companion object {
+        fun mapFromSearchResult(searchResult: SearchScreen.SearchResult): SearchResultSummary =
+            SearchResultSummary(
+                id = searchResult.id,
+                briefTitle = searchResult.studySummary.briefTitle,
+                principleInvestigator = "Dr Matt Taila",
+                leadOrganization = "TGen",
+                phase = "Phase",
+                totalSites = "12312 total sites"
+            )
+    }
 
 }
