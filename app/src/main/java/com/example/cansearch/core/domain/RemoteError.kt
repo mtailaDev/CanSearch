@@ -1,0 +1,7 @@
+package com.example.cansearch.core.domain
+
+sealed class RemoteError
+
+object SyncError : RemoteError()
+data class HttpError(val code: Int, val message: String) : RemoteError()
+data class ParsingError(val error: Throwable) : RemoteError()

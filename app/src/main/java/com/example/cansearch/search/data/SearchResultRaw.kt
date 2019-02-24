@@ -1,9 +1,10 @@
 package com.example.cansearch.search.data
 
-import com.example.cansearch.search.domain.SearchResult
+import com.example.cansearch.search.domain.SearchScreen
 import com.example.cansearch.search.ui.SearchListItem
 import com.example.cansearch.trial.ui.TrialEligibilityItem
 import com.example.cansearch.trial.ui.TrialSummaryItem
+import com.example.cansearch.search.domain.SearchScreen.SearchResult
 import com.google.gson.annotations.SerializedName
 
 data class SearchResultRaw(
@@ -177,6 +178,7 @@ data class SearchResultRaw(
         }
 
         // todo hard coded values
+        // todo - wrap in attempt transform
         fun mapToSearchListItem(): SearchListItem {
             return SearchListItem(
                 briefTitle = briefTitle,
@@ -233,7 +235,7 @@ data class SearchResultRaw(
         }
 
         // todo hard coded values
-        private fun mapToAssociatedGenes(): SearchResult.AssociatedGenes {
+        private fun mapToAssociatedGenes(): SearchScreen.SearchResult.AssociatedGenes {
             val list = mutableListOf<String>()
             list.add("HER2")
             list.add("P53")
