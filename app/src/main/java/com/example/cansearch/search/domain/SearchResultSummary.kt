@@ -1,5 +1,8 @@
 package com.example.cansearch.search.domain
 
+import com.example.cansearch.App
+import com.example.cansearch.R
+
 data class SearchResultSummary(
     val id: String,
     val briefTitle: String,
@@ -13,11 +16,16 @@ data class SearchResultSummary(
             SearchResultSummary(
                 id = searchResult.id,
                 briefTitle = searchResult.studySummary.briefTitle,
-                principleInvestigator = "Dr Matt Taila",
-                leadOrganization = "TGen",
-                phase = "Phase",
+                principleInvestigator = returnValue(searchResult, R.string.trial_summary_principle_investigator),
+                leadOrganization = returnValue(searchResult, R.string.trial_summary_lead_organization),
+                phase = returnValue(searchResult, R.string.trial_summary_phase),
                 totalSites = "12312 total sites"
             )
+
+        private fun returnValue(searchResult: SearchScreen.SearchResult, stringId: Int) : String {
+            return searchResult.trialSummary.summaryItems[App.instance.getString(stringId)]!!.second
+        }
     }
+
 
 }

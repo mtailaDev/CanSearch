@@ -26,7 +26,7 @@ data class SearchScreen(val totalResults: Int, val searchResults: List<SearchRes
 
         // this needs to be a key value map instead of a list
         data class TrialSummary(
-            val summaryItems: MutableList<TrialSummaryItem>
+            val summaryItems: HashMap<String, Pair<String, String>>
         )
 
         data class AssociatedDiseases(
@@ -38,7 +38,7 @@ data class SearchScreen(val totalResults: Int, val searchResults: List<SearchRes
         )
 
         data class Eligibility(
-            val eligibilityCriteria: MutableList<TrialEligibilityItem>
+            val eligibilityCriteria: HashMap<String, Pair<String, String>>
         )
 
         private fun mapToSearchResultsSummary(): SearchResultSummary {

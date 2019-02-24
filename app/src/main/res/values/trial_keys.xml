@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--// Summary-->
+    <string name="trial_summary_principle_investigator">Principle Investigator</string>
+    <string name="trial_summary_lead_organization">Lead Organization</string>
+    <string name="trial_summary_phase">Phase</string>
+    <string name="trial_summary_activity_status">Activity Status</string>
+    <string name="trial_summary_primary_purpose">Primary Purpose</string>
+    <string name="trial_summary_anatomic_site">Anatomic Site</string>
+
+    <!--// Eligibility-->
+    <string name="trial_eligibility_gender">Gender</string>
+    <string name="trial_eligibility_min_age">Minimum Age</string>
+    <string name="trial_eligibility_max_age">Maximum Age</string>
+</resources>
