@@ -1,5 +1,7 @@
 package com.example.cansearch.core.domain
 
+import com.example.cansearch.core.data.RemoteData
+
 sealed class Option<out A : Any> {
 
     object None : Option<Nothing>()
@@ -22,3 +24,16 @@ sealed class Option<out A : Any> {
 
     fun isNone(): Boolean = this is None
 }
+
+fun <A : Any> A?.toOption(): Option<A> = if (this == null) Option.None else Option.Some(this)
+
+fun <A : Any> Option<A>.withDefault(default: A): A = when (this) {
+    is Option.None -> default
+    is Option.Some -> value
+}
+
+fun <E : Any, A : Any> Option<A>.toRemoteData(emptyValue: RemoteData<E, A> = RemoteData.Loading): RemoteData<E, A> =
+    when (this) {
+        is Option.None -> emptyValue
+        is Option.Some -> RemoteData.succeed(value)
+    }

@@ -1,9 +1,7 @@
 package com.example.cansearch.search.ui.screens
 
 import android.annotation.SuppressLint
-import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,43 +11,35 @@ import com.example.cansearch.R
 import com.example.cansearch.core.gone
 import com.example.cansearch.core.visible
 import com.example.cansearch.home.HomeActivity
-import com.example.cansearch.search.data.SearchApiService
-import com.example.cansearch.search.di.SearchDagger
-import com.example.cansearch.search.ui.adapters.QuickSearchAdapter
 import com.example.cansearch.search.ui.SearchListItem
+import com.example.cansearch.search.ui.adapters.QuickSearchAdapter
 import com.example.cansearch.search.ui.adapters.SearchResultsAdapter
 import com.google.android.material.snackbar.Snackbar
-import io.reactivex.Observable
 import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.fragment_search.*
 import java.util.concurrent.TimeUnit
-import javax.inject.Inject
 
 class SearchFragment : Fragment(), SearchResultsAdapter.onArchiveClickHandler {
 
-    lateinit var service: SearchApiService
-        @Inject set
+//    lateinit var repository: SearchRepository
+//        @Inject set
 
+    lateinit var viewModel: SearchFragmentViewModel
 
     @SuppressLint("CheckResult")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        SearchDagger.component.inject(this)
-        service.getTransactions()
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .flatMap { results ->
-                Observable.fromIterable(results.trials)
-                    .map { trials -> trials.mapToSearchListItem() }
-                    .toList()
-            }
-            .subscribe({ trials ->
-                showResultsRecyclerView(trials)
-            }, {
-                Log.i("ASDAD", "ASDD")
-            })
+//        viewModel = ViewModelProviders.of(this).get(SearchFragmentViewModel::class.java)
+//        SearchDagger.component.inject(this)
+
+
+//        val x = GetSearchUseCase(repository).execute("Test")
+//            .subscribeOn(Schedulers.io())
+//            .observeOn(AndroidSchedulers.mainThread())
+//            .subscribe {
+//            }
     }
 
     override fun onArchive(): Boolean {
@@ -78,6 +68,7 @@ class SearchFragment : Fragment(), SearchResultsAdapter.onArchiveClickHandler {
         super.onViewCreated(view, savedInstanceState)
         setupQuickSearchRecyclerView()
         setOnClickListeners()
+//        viewModel.getSearch()
     }
 
     private fun setupQuickSearchRecyclerView() {
@@ -105,6 +96,7 @@ class SearchFragment : Fragment(), SearchResultsAdapter.onArchiveClickHandler {
         }
     }
 
+    // todo - clean this up
     private fun showSearchingStatus() {
         search_tv_results_title.text = resources.getString(R.string.search_status_searching)
         search_rv_quick_search.gone()

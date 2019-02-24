@@ -7,4 +7,7 @@ data class SearchResultSummary(
     val leadOrganization: String,
     val phase: String,
     val totalSites: String
-)
+) {
+
+
+}
