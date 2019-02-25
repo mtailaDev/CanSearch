@@ -1,61 +1,55 @@
 package com.example.cansearch.search.domain
 
+import android.os.Parcelable
 import com.example.cansearch.core.domain.RemoteError
 import com.example.cansearch.core.domain.Result
 import com.example.cansearch.core.domain.attemptTransform
 import com.example.cansearch.search.data.SearchResultRaw
-import com.example.cansearch.trial.ui.TrialEligibilityItem
-import com.example.cansearch.trial.ui.TrialSummaryItem
+import kotlinx.android.parcel.Parcelize
 
 data class SearchScreen(val totalResults: Int, val searchResults: List<SearchResult>) {
 
+    @Parcelize
     data class SearchResult(
         val id: String,
         val studySummary: StudySummary,
         val trialSummary: TrialSummary,
         val associatedDiseases: AssociatedDiseases,
         val associatedGenes: AssociatedGenes,
-        val eligibility: Eligibility
-    ) {
+        val eligibility: EligibilityCriteria
+    ) : Parcelable {
+
+        @Parcelize
         data class StudySummary(
             val briefTitle: String,
             val briefDescription: String,
             val scientificTitle: String,
             val scientificDescription: String
-        )
+        ) : Parcelable
 
-        // this needs to be a key value map instead of a list
+        @Parcelize
         data class TrialSummary(
-            val summaryItems: HashMap<String, Pair<String, String>>
-        )
+            val summaryItems: LinkedHashMap<String, Pair<String, String>>
+        ) : Parcelable
 
+        @Parcelize
         data class AssociatedDiseases(
-            val associatedDiseases: MutableList<String>
-        )
+            val associatedDiseases: List<String>
+        ) : Parcelable
 
+        @Parcelize
         data class AssociatedGenes(
             val associatedGenes: MutableList<String>
-        )
+        ) : Parcelable
 
-        data class Eligibility(
-            val eligibilityCriteria: HashMap<String, Pair<String, String>>
-        )
-
-        private fun mapToSearchResultsSummary(): SearchResultSummary {
-            return SearchResultSummary(
-                id = id,
-                briefTitle = studySummary.briefTitle,
-                principleInvestigator = "Test",
-                leadOrganization = "Test",
-                phase = "Test",
-                totalSites = "123123"
-            )
-        }
-
+        @Parcelize
+        data class EligibilityCriteria(
+            val eligibilityCriteria: LinkedHashMap<String, Pair<String, String>>
+        ) : Parcelable
     }
 
     companion object {
-        fun mapFromSearchResultRaw(rawResponse: SearchResultRaw) : Result<RemoteError, SearchScreen> = attemptTransform {
+        fun mapFromSearchResultRaw(rawResponse: SearchResultRaw): Result<RemoteError, SearchScreen> = attemptTransform {
             SearchScreen(
                 totalResults = rawResponse.total,
                 searchResults = rawResponse.trials.map { trials -> trials.mapToSearchResult() }

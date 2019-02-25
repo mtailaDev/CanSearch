@@ -11,7 +11,7 @@
             style="@style/TrialContainerTitle"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            android:text="Study Summary"/>
+            android:text="@string/trial_detail_summary_title"/>
 
     <View
             android:id="@+id/study_summary_title_divider"
@@ -26,7 +26,7 @@
             android:textAppearance="@style/SummaryTitleTextAppearance"
             app:layout_constraintStart_toStartOf="@+id/study_summary_card_title"
             app:layout_constraintTop_toBottomOf="@+id/study_summary_title_divider"
-            android:text="Study Title"/>
+            android:text="@string/trial_detail_study_title"/>
 
     <TextView
             android:id="@+id/study_summary_title"
@@ -34,8 +34,7 @@
             android:textAppearance="@style/SummaryTitleValueTextAppearance"
             app:layout_constraintStart_toStartOf="@+id/study_summary_card_title"
             app:layout_constraintTop_toBottomOf="@+id/study_summary_study_title"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:text="Crizotinib in Treating Patients with Stage IB-IIIA Non-small Cell Lung Cancer That Has Been Removed by Surgery and ALK Fusion Mutations (An ALCHEMIST Treatment Trial)"/>
+            app:layout_constraintEnd_toEndOf="parent"/>
 
     <TextView
             android:id="@+id/study_summary_description_title"
@@ -43,7 +42,7 @@
             android:textAppearance="@style/SummaryTitleTextAppearance"
             app:layout_constraintStart_toStartOf="@+id/study_summary_card_title"
             app:layout_constraintTop_toBottomOf="@+id/study_summary_title"
-            android:text="Description"/>
+            android:text="@string/trial_detail_study_description"/>
 
     <TextView
             android:id="@+id/study_summary_description"
@@ -51,8 +50,7 @@
             android:textAppearance="@style/SummaryTitleValueTextAppearance"
             app:layout_constraintStart_toStartOf="@+id/study_summary_card_title"
             app:layout_constraintTop_toBottomOf="@+id/study_summary_description_title"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:text="This phase III ALCHEMIST trial studies how well crizotinib works in treating patients with stage IB-IIIA non-small cell lung cancer that has been removed by surgery and has a mutation in a protein called anaplastic lymphoma kinase (ALK). Mutations, or changes, in ALK can make it very active and important for tumor cell growth and progression. Crizotinib may stop the growth of tumor cells by blocking the ALK protein from working. Crizotinib may be an effective treatment for patients with non-small cell lung cancer and an ALK fusion mutation."/>
+            app:layout_constraintEnd_toEndOf="parent"/>
 
     <com.google.android.material.button.MaterialButton
             android:id="@+id/study_summary_scientific_detail_btn"
@@ -60,7 +58,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/study_summary_description"
             android:layout_marginTop="16dp"
-            android:text="Scientific Details"/>
+            android:text="@string/trial_detail_scientific_detail"/>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -6,10 +6,11 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.cansearch.R
 import com.example.cansearch.search.ui.TrialEligibility
+import com.example.cansearch.trial.ui.TrialEligibilityItem
 import kotlinx.android.synthetic.main.item_list_eligibility.view.*
 
 
-class TrialEligibilityAdapter(private val eligibilityList: List<TrialEligibility>) : RecyclerView.Adapter<TrialEligibilityAdapter.ViewHolder>() {
+class TrialEligibilityAdapter(private val eligibilityList: List<TrialEligibilityItem>) : RecyclerView.Adapter<TrialEligibilityAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val inflater = LayoutInflater.from(parent.context)
@@ -26,7 +27,7 @@ class TrialEligibilityAdapter(private val eligibilityList: List<TrialEligibility
     }
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        fun setSummaryItem(eligibility: TrialEligibility) {
+        fun setSummaryItem(eligibility: TrialEligibilityItem) {
             itemView.eligibility_title.text = eligibility.eligibilityTitle
             itemView.eligibility_value.text = eligibility.eligibilityValue
         }

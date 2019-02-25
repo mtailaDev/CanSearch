@@ -10,22 +10,15 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.cansearch.R
-import com.example.cansearch.core.domain.RemoteError
-import com.example.cansearch.core.domain.Result
 import com.example.cansearch.core.gone
 import com.example.cansearch.core.visible
 import com.example.cansearch.home.HomeActivity
 import com.example.cansearch.search.di.SearchDagger
-import com.example.cansearch.search.domain.SearchResultSummary
-import com.example.cansearch.search.ui.SearchListItem
+import com.example.cansearch.search.domain.SearchScreen
 import com.example.cansearch.search.ui.adapters.QuickSearchAdapter
 import com.example.cansearch.search.ui.adapters.SearchResultsAdapter
 import com.google.android.material.snackbar.Snackbar
-import io.reactivex.Single
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.fragment_search.*
-import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
 class SearchFragment : Fragment(), SearchResultsAdapter.onArchiveClickHandler {
@@ -45,12 +38,13 @@ class SearchFragment : Fragment(), SearchResultsAdapter.onArchiveClickHandler {
         return true
     }
 
-    override fun onTrialSelected() {
+    override fun onTrialSelected(selectedTrial: SearchScreen.SearchResult) {
+
         val x = activity as HomeActivity
-        x.showtrial()
+        x.showTrial(selectedTrial)
     }
 
-    private fun showResultsRecyclerView(trials: List<SearchResultSummary>) {
+    private fun showResultsRecyclerView(trials: List<SearchScreen.SearchResult>) {
         search_lottie_searching.gone()
         search_rv_quick_search.visible()
         search_rv_quick_search.adapter = SearchResultsAdapter(trials, this)
@@ -69,7 +63,7 @@ class SearchFragment : Fragment(), SearchResultsAdapter.onArchiveClickHandler {
         viewModel.getSearch()
         viewModel.searchResult.observe(this, Observer {
             search_tv_results_title.text = "${it.totalResults} trials found"
-            showResultsRecyclerView(it.searchResults.map { searchResult -> SearchResultSummary.mapFromSearchResult(searchResult) })
+            showResultsRecyclerView(it.searchResults)
         })
     }
 

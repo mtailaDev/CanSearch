@@ -8,7 +8,7 @@
     <string name="trial_summary_primary_purpose">Primary Purpose</string>
     <string name="trial_summary_anatomic_site">Anatomic Site</string>
 
-    <!--// Eligibility-->
+    <!--// EligibilityCriteria-->
     <string name="trial_eligibility_gender">Gender</string>
     <string name="trial_eligibility_min_age">Minimum Age</string>
     <string name="trial_eligibility_max_age">Maximum Age</string>

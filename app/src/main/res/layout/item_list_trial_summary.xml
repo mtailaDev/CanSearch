@@ -9,16 +9,20 @@
             android:id="@+id/trial_item_title"
             style="@style/TrialContainerTitle"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:text="Study Summary"/>
+            app:layout_constraintTop_toTopOf="parent"/>
 
     <TextView
             android:id="@+id/trial_item_value"
             style="@style/TrialContainerTitle"
+            android:layout_width="0dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/trial_item_title"
+            android:ellipsize="end"
+            android:textAlignment="viewEnd"
+            android:maxLines="1"
             android:layout_marginEnd="16dp"
-            android:text="Study Summary"/>
+            android:layout_marginStart="16dp"/>
 
     <View
             android:id="@+id/trial_item_divider"

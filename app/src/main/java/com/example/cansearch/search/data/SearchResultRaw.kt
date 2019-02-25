@@ -1,11 +1,12 @@
 package com.example.cansearch.search.data
 
+import android.os.Parcelable
 import com.example.cansearch.App
 import com.example.cansearch.R
 import com.example.cansearch.search.domain.SearchScreen
 import com.example.cansearch.search.domain.SearchScreen.SearchResult
-import com.example.cansearch.search.ui.SearchListItem
 import com.google.gson.annotations.SerializedName
+import kotlinx.android.parcel.Parcelize
 
 data class SearchResultRaw(
     val total: Int,
@@ -53,6 +54,8 @@ data class SearchResultRaw(
 
         val sites: List<SitesItem>,
 
+        val diseases: List<AssociatedDisease>,
+
         val eligibility: Eligibility,
 
         @SerializedName("number_of_arms")
@@ -61,6 +64,12 @@ data class SearchResultRaw(
         val arms: List<Arms>
 
     ) {
+
+        data class AssociatedDisease(
+            @SerializedName("display_name")
+            val associatedDiseaseName: String
+        )
+
         data class OutcomeMeasuresItem(
             @SerializedName("timeframe")
             val timeFrame: String,
@@ -177,18 +186,6 @@ data class SearchResultRaw(
             )
         }
 
-        // todo hard coded values
-        // todo - wrap in attempt transform
-        fun mapToSearchListItem(): SearchListItem {
-            return SearchListItem(
-                briefTitle = briefTitle,
-                principleInvestigator = principalInvestigator,
-                leadOrganization = leadOrganization,
-                phase = "Phase: " + phase.phase,
-                totalSites = "${sites.size} locations"
-            )
-        }
-
         fun mapToSearchResult(): SearchResult {
             return SearchResult(
                 id = nciID,
@@ -211,10 +208,10 @@ data class SearchResultRaw(
 
         // todo hard coded values
         private fun mapToTrialSummary(): SearchResult.TrialSummary {
-            val trialSummaryHashMap = HashMap<String, Pair<String, String>>()
+            val trialSummaryHashMap = LinkedHashMap<String, Pair<String, String>>()
 
             trialSummaryHashMap[App.instance.getString(R.string.trial_summary_principle_investigator)] =
-                Pair(App.instance.getString(R.string.trial_summary_principle_investigator), principalInvestigator)
+                Pair(App.instance.getString(R.string.trial_summary_principle_investigator), "Dr. $principalInvestigator")
 
             trialSummaryHashMap[App.instance.getString(R.string.trial_summary_lead_organization)] =
                 Pair(App.instance.getString(R.string.trial_summary_lead_organization), leadOrganization)
@@ -226,7 +223,7 @@ data class SearchResultRaw(
                 Pair(App.instance.getString(R.string.trial_summary_activity_status), trialStatus)
 
             trialSummaryHashMap[App.instance.getString(R.string.trial_summary_primary_purpose)] =
-                Pair(App.instance.getString(R.string.trial_summary_primary_purpose), primaryPurpose.phase)
+                Pair(App.instance.getString(R.string.trial_summary_primary_purpose), primaryPurpose.phase.toLowerCase().capitalize())
 
             // todo - add this raw model
             trialSummaryHashMap[App.instance.getString(R.string.trial_summary_anatomic_site)] =
@@ -235,16 +232,8 @@ data class SearchResultRaw(
             return SearchResult.TrialSummary(trialSummaryHashMap)
         }
 
-        // todo hard coded values
         private fun mapToAssociatedDisease(): SearchResult.AssociatedDiseases {
-            val diseaseList = mutableListOf<String>()
-            diseaseList.add("Breast Cancer")
-            diseaseList.add("Malignant Neoplasm")
-            diseaseList.add("Other Disease")
-            diseaseList.add("Epithelial Neoplasm")
-            diseaseList.add("Malignant Breast Neoplasm")
-            diseaseList.add("HER2/Neu Status")
-            diseaseList.add("Bilateral Breast Carcinoma")
+            val diseaseList = diseases.map { "${it.associatedDiseaseName}" }
             return SearchResult.AssociatedDiseases(diseaseList)
         }
 
@@ -261,22 +250,19 @@ data class SearchResultRaw(
         }
 
         // todo hard coded values
-        private fun mapToEligibility(): SearchResult.Eligibility {
+        private fun mapToEligibility(): SearchResult.EligibilityCriteria {
 
-            val trialEligibilityHashMap = HashMap<String, Pair<String, String>>()
+            val trialEligibilityHashMap = LinkedHashMap<String, Pair<String, String>>()
 
-            trialEligibilityHashMap[App.instance.getString(R.string.trial_eligibility_gender)] =
-                Pair(App.instance.getString(R.string.trial_eligibility_gender), eligibility.structured.gender)
+            trialEligibilityHashMap[App.instance.getString(R.string.trial_eligibility_gender)] = Pair(App.instance.getString(R.string.trial_eligibility_gender), eligibility.structured.gender.toLowerCase().capitalize())
 
-            trialEligibilityHashMap[App.instance.getString(R.string.trial_eligibility_min_age)] =
-                Pair(App.instance.getString(R.string.trial_eligibility_gender), "${eligibility.structured.minAgeInYears}")
+            trialEligibilityHashMap[App.instance.getString(R.string.trial_eligibility_min_age)] = Pair(App.instance.getString(R.string.trial_eligibility_min_age), "${eligibility.structured.minAgeInYears}")
 
             val maxAge = if (eligibility.structured.maxAgeInYears == 999) "NA" else "${eligibility.structured.maxAgeInYears}"
 
-            trialEligibilityHashMap[App.instance.getString(R.string.trial_eligibility_max_age)] =
-                Pair(App.instance.getString(R.string.trial_eligibility_max_age), maxAge)
+            trialEligibilityHashMap[App.instance.getString(R.string.trial_eligibility_max_age)] = Pair(App.instance.getString(R.string.trial_eligibility_max_age), maxAge)
 
-            return SearchResult.Eligibility(trialEligibilityHashMap)
+            return SearchResult.EligibilityCriteria(trialEligibilityHashMap)
         }
     }
 }
