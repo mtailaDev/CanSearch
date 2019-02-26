@@ -42,4 +42,14 @@
     <string name="search_status_searching">Searching</string>
     <string name="search_status_results">Results</string>
 
+    <!--// detailed trial view-->
+    <string name="trial_detail_summary_title">Study Summary</string>
+    <string name="trial_detail_study_title">Study Title</string>
+    <string name="trial_detail_scientific_detail">Scientific Detail</string>
+    <string name="trial_detail_study_description">Study Description</string>
+    <string name="trial_detail_trial_title">Trial Summary</string>
+    <string name="trial_detail_associated_disease_title">Associated Diseases</string>
+    <string name="trial_detail_associated_disease_button">See All</string>
+    <string name="trial_detail_associated_genes_title">Associated Gene Mutations</string>
+
 </resources>

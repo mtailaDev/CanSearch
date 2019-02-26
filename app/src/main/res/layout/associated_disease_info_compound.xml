@@ -29,5 +29,13 @@
             android:layout_marginEnd="16dp"
             android:layout_marginTop="16dp"/>
 
+    <com.google.android.material.button.MaterialButton
+            android:id="@+id/study_associated_btn"
+            style="@style/PrimaryButton"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/disease_chip_group"
+            android:layout_marginTop="16dp"
+            android:text="@string/trial_detail_associated_disease_button"/>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

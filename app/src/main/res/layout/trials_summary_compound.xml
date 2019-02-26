@@ -11,7 +11,7 @@
             style="@style/TrialContainerTitle"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            android:text="Study Summary"/>
+            android:text="@string/trial_detail_trial_title"/>
 
     <View
             android:id="@+id/trial_summary_title_divider"

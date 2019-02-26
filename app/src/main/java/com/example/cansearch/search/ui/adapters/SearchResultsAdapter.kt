@@ -14,11 +14,12 @@ import com.example.cansearch.R
 import com.example.cansearch.core.domain.RemoteError
 import com.example.cansearch.core.domain.Result
 import com.example.cansearch.search.domain.SearchResultSummary
+import com.example.cansearch.search.domain.SearchScreen
 import com.example.cansearch.search.ui.SearchListItem
 import kotlinx.android.synthetic.main.item_list_search.view.*
 
 class SearchResultsAdapter(
-    private val searchResults: List<SearchResultSummary>,
+    private val searchResults: List<SearchScreen.SearchResult>,
     private var archiveListener: onArchiveClickHandler
 ) :
     RecyclerView.Adapter<SearchResultsAdapter.ViewHolder>() {
@@ -30,10 +31,10 @@ class SearchResultsAdapter(
     }
 
     override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {
-        viewHolder.setData(searchResults[position])
+        viewHolder.setData(SearchResultSummary.mapFromSearchResult(searchResults[position]))
 
         viewHolder.itemView.search_results_parent.setOnClickListener {
-            archiveListener.onTrialSelected()
+            archiveListener.onTrialSelected(searchResults[position])
         }
 
         viewHolder.itemView.search_result_archive_icon.setOnClickListener {
@@ -94,6 +95,6 @@ class SearchResultsAdapter(
     // todo - rename this
     interface onArchiveClickHandler {
         fun onArchive(): Boolean
-        fun onTrialSelected()
+        fun onTrialSelected(selectedTrial: SearchScreen.SearchResult)
     }
 }
