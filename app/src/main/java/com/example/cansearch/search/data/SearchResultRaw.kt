@@ -1,12 +1,10 @@
 package com.example.cansearch.search.data
 
-import android.os.Parcelable
 import com.example.cansearch.App
 import com.example.cansearch.R
 import com.example.cansearch.search.domain.SearchScreen
 import com.example.cansearch.search.domain.SearchScreen.SearchResult
 import com.google.gson.annotations.SerializedName
-import kotlinx.android.parcel.Parcelize
 
 data class SearchResultRaw(
     val total: Int,
@@ -50,6 +48,8 @@ data class SearchResultRaw(
         @SerializedName("lead_org")
         val leadOrganization: String,
 
+        val biomarkers: List<Biomarkers>?,
+
         val collaborators: List<Collaborators>,
 
         val sites: List<SitesItem>,
@@ -81,6 +81,8 @@ data class SearchResultRaw(
             @SerializedName("type_code")
             val typeCode: String
         )
+
+        data class Biomarkers(val name: String)
 
         data class Phase(val phase: String)
 
@@ -192,7 +194,7 @@ data class SearchResultRaw(
                 studySummary = mapToStudySummary(),
                 trialSummary = mapToTrialSummary(),
                 associatedDiseases = mapToAssociatedDisease(),
-                associatedGenes = mapToAssociatedGenes(),
+                associatedBiomarkers = mapToAssociatedGenes(),
                 eligibility = mapToEligibility()
             )
         }
@@ -237,19 +239,11 @@ data class SearchResultRaw(
             return SearchResult.AssociatedDiseases(diseaseList)
         }
 
-        // todo hard coded values
-        private fun mapToAssociatedGenes(): SearchScreen.SearchResult.AssociatedGenes {
-            val list = mutableListOf<String>()
-            list.add("HER2")
-            list.add("P53")
-            list.add("NF1")
-            list.add("MAPK")
-            list.add("BRAF")
-            list.add("MERK")
-            return SearchResult.AssociatedGenes(list)
+        private fun mapToAssociatedGenes(): SearchScreen.SearchResult.AssociatedBiomarkers {
+            val associatedBiomarkers = biomarkers?.map { "${it.name}" }
+            return SearchScreen.SearchResult.AssociatedBiomarkers(associatedBiomarkers)
         }
 
-        // todo hard coded values
         private fun mapToEligibility(): SearchResult.EligibilityCriteria {
 
             val trialEligibilityHashMap = LinkedHashMap<String, Pair<String, String>>()

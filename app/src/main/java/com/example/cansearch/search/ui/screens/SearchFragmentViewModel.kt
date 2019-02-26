@@ -1,6 +1,7 @@
 package com.example.cansearch.search.ui.screens
 
 import android.annotation.SuppressLint
+import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.cansearch.core.data.get
@@ -32,10 +33,10 @@ class SearchFragmentViewModel @Inject constructor(
 
                 if (it.isSuccess()) {
                     searchResult.value = it.get()
-//                    val searchScreen  = it.get() as SearchScreen
-//                    searchTotal.value = "${searchScreen.totalResults} trials found"
-//                    val searchResultList = searchScreen.searchResults.map { trial -> SearchResultSummary.mapFromSearchResult(trial) }
-//                    searchResults.value = searchResultList.success()
+                } else if (it.isFailure()){
+                    Log.i("ASD", "ASDAS")
+                    Log.i("ASD", "ASDAS")
+                    Log.i("ASD", "ASDAS")
                 }
             }
 

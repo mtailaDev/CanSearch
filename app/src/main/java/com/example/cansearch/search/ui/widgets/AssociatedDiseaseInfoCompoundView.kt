@@ -14,7 +14,7 @@ import kotlinx.android.synthetic.main.associated_disease_info_compound.view.*
 class AssociatedDiseaseInfoCompoundView @JvmOverloads constructor(context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0)
     : ConstraintLayout(context, attrs, defStyleAttr) {
 
-    var associatedDiseases = emptyList<String>()
+    lateinit var chipType: ChipType
 
     init {
         inflate(context, R.layout.associated_disease_info_compound, this)
@@ -24,29 +24,37 @@ class AssociatedDiseaseInfoCompoundView @JvmOverloads constructor(context: Conte
         chips_card_title.text = cardTitle
     }
 
-    private fun setChipGroup(chipColor: Int, chipTitles: List<String>) {
-        for (title in chipTitles) {
-            val chip = Chip(context)
-            chip.setChipBackgroundColorResource(chipColor)
-            chip.setTextColor(context.getColorCompat(android.R.color.white))
-            chip.text = title
-            disease_chip_group.addView(chip)
+    private fun setChipGroup(chipColor: Int, chipTitles: List<String>?) {
+        if (chipTitles != null){
+            for (title in chipTitles) {
+                val chip = Chip(context)
+                chip.setChipBackgroundColorResource(chipColor)
+                chip.setTextColor(context.getColorCompat(android.R.color.white))
+                chip.text = title
+                disease_chip_group.addView(chip)
+            }
         }
     }
 
-    fun setData(associatedDiseases: List<String>) {
-        this.associatedDiseases = associatedDiseases
+    fun setData(chipColor: Int, associatedData: List<String>?, chipType: ChipType) {
 
-        if (associatedDiseases.size > MAX_LIST_SIZE) {
-            setChipGroup(R.color.colorPrimary, associatedDiseases.subList(0, 19))
+        this.chipType = chipType
+
+        if (associatedData?.size!! > MAX_LIST_SIZE) {
+            setChipGroup(chipColor, associatedData.subList(0, 19))
             study_associated_btn.visible()
         } else {
-            setChipGroup(R.color.colorPrimary, associatedDiseases)
+            setChipGroup(chipColor, associatedData)
             study_associated_btn.gone()
         }
     }
 
     companion object {
         const val MAX_LIST_SIZE = 20
+    }
+
+    enum class ChipType{
+        DISEASE,
+        BIOMARKERS
     }
 }

@@ -15,7 +15,7 @@ data class SearchScreen(val totalResults: Int, val searchResults: List<SearchRes
         val studySummary: StudySummary,
         val trialSummary: TrialSummary,
         val associatedDiseases: AssociatedDiseases,
-        val associatedGenes: AssociatedGenes,
+        val associatedBiomarkers: AssociatedBiomarkers,
         val eligibility: EligibilityCriteria
     ) : Parcelable {
 
@@ -28,6 +28,11 @@ data class SearchScreen(val totalResults: Int, val searchResults: List<SearchRes
         ) : Parcelable
 
         @Parcelize
+        data class AssociatedBiomarkers(
+            val biomarkers: List<String>?
+        ) : Parcelable
+
+        @Parcelize
         data class TrialSummary(
             val summaryItems: LinkedHashMap<String, Pair<String, String>>
         ) : Parcelable
@@ -35,11 +40,6 @@ data class SearchScreen(val totalResults: Int, val searchResults: List<SearchRes
         @Parcelize
         data class AssociatedDiseases(
             val associatedDiseases: List<String>
-        ) : Parcelable
-
-        @Parcelize
-        data class AssociatedGenes(
-            val associatedGenes: MutableList<String>
         ) : Parcelable
 
         @Parcelize
