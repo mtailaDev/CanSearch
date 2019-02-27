@@ -10,7 +10,6 @@ import com.example.cansearch.core.visible
 import com.google.android.material.chip.Chip
 import kotlinx.android.synthetic.main.associated_disease_info_compound.view.*
 
-
 class AssociatedDiseaseInfoCompoundView @JvmOverloads constructor(context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0)
     : ConstraintLayout(context, attrs, defStyleAttr) {
 
