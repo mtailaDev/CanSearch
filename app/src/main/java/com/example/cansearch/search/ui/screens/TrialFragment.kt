@@ -4,17 +4,22 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.FrameLayout
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
 import com.example.cansearch.R
 import com.example.cansearch.core.gone
+import com.example.cansearch.core.visible
 import com.example.cansearch.search.domain.SearchScreen
 import com.example.cansearch.search.ui.widgets.AssociatedDiseaseInfoCompoundView
+import com.google.android.material.bottomsheet.BottomSheetBehavior
 import kotlinx.android.synthetic.main.fragment_trial.*
+import kotlinx.android.synthetic.main.study_summary_compound.*
+import kotlinx.android.synthetic.main.trial_detail_bottom_sheet.*
 
 class TrialFragment : Fragment() {
 
-
+    private lateinit var sheetBehavior: BottomSheetBehavior<FrameLayout>
     private lateinit var parentViewModel: TrialActivityViewModel
     private lateinit var selectedTrial: SearchScreen.SearchResult
 
@@ -37,17 +42,50 @@ class TrialFragment : Fragment() {
         showEligibilityCriteria(selectedTrial.eligibility)
         showAssociatedDiseases(selectedTrial.associatedDiseases)
         showAssociatedBiomarkers(selectedTrial.associatedBiomarkers)
+        sheetBehavior = BottomSheetBehavior.from<FrameLayout>(bottom_sheet)
+        setBottomSheetListener()
+        setOnClickListeners()
+    }
+
+    private fun setBottomSheetListener() {
+        sheetBehavior.setBottomSheetCallback(object : BottomSheetBehavior.BottomSheetCallback(){
+            override fun onSlide(p0: View, p1: Float) {
+            }
+
+            override fun onStateChanged(p0: View, newState: Int) {
+                when(newState){
+                    BottomSheetBehavior.STATE_SETTLING,
+                    BottomSheetBehavior.STATE_EXPANDED ->{
+                        background.visible()
+                    }
+                    BottomSheetBehavior.STATE_COLLAPSED ->{
+                        background.gone()
+                    }
+                }
+            }
+        })
+    }
+
+
+    private fun setOnClickListeners() {
+        study_summary_scientific_detail_btn.setOnClickListener {
+
+            scientific_title.text = selectedTrial.studySummary.scientificTitle
+            scientific_description.text = selectedTrial.studySummary.scientificDescription
+            sheetBehavior.state = BottomSheetBehavior.STATE_EXPANDED
+        }
     }
 
     private fun showAssociatedBiomarkers(associatedBiomarkers: SearchScreen.SearchResult.AssociatedBiomarkers) {
         context.let {
             trial_associated_genes.setCardTitle(it!!.getString(R.string.trial_detail_associated_genes_title))
         }
-        if (associatedBiomarkers.biomarkers != null){
+        if (associatedBiomarkers.biomarkers != null) {
             trial_associated_genes.setData(
                 chipColor = R.color.chip_color_biomarkers,
                 associatedData = associatedBiomarkers.biomarkers,
-                chipType = AssociatedDiseaseInfoCompoundView.ChipType.BIOMARKERS)
+                chipType = AssociatedDiseaseInfoCompoundView.ChipType.BIOMARKERS
+            )
         } else trial_associated_genes.gone()
 
     }
@@ -58,7 +96,8 @@ class TrialFragment : Fragment() {
             trial_disease.setData(
                 chipColor = R.color.chip_color_disease,
                 associatedData = associatedDiseases.associatedDiseases,
-                chipType = AssociatedDiseaseInfoCompoundView.ChipType.DISEASE)
+                chipType = AssociatedDiseaseInfoCompoundView.ChipType.DISEASE
+            )
         }
     }
 
