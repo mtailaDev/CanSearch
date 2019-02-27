@@ -148,7 +148,7 @@ data class SearchResultRaw(
             val orgName: String? = null,
 
             @SerializedName("org_coordinates")
-            val orgCoordinates: OrgCoordinates
+            val orgCoordinates: OrgCoordinates?
         ) {
             data class OrgCoordinates(
                 val lon: Double,
@@ -195,7 +195,8 @@ data class SearchResultRaw(
                 trialSummary = mapToTrialSummary(),
                 associatedDiseases = mapToAssociatedDisease(),
                 associatedBiomarkers = mapToAssociatedGenes(),
-                eligibility = mapToEligibility()
+                eligibility = mapToEligibility(),
+                sites = mapToSites()
             )
         }
 
@@ -213,7 +214,10 @@ data class SearchResultRaw(
             val trialSummaryHashMap = LinkedHashMap<String, Pair<String, String>>()
 
             trialSummaryHashMap[App.instance.getString(R.string.trial_summary_principle_investigator)] =
-                Pair(App.instance.getString(R.string.trial_summary_principle_investigator), "Dr. $principalInvestigator")
+                Pair(
+                    App.instance.getString(R.string.trial_summary_principle_investigator),
+                    "Dr. $principalInvestigator"
+                )
 
             trialSummaryHashMap[App.instance.getString(R.string.trial_summary_lead_organization)] =
                 Pair(App.instance.getString(R.string.trial_summary_lead_organization), leadOrganization)
@@ -225,13 +229,37 @@ data class SearchResultRaw(
                 Pair(App.instance.getString(R.string.trial_summary_activity_status), trialStatus)
 
             trialSummaryHashMap[App.instance.getString(R.string.trial_summary_primary_purpose)] =
-                Pair(App.instance.getString(R.string.trial_summary_primary_purpose), primaryPurpose.phase.toLowerCase().capitalize())
+                Pair(
+                    App.instance.getString(R.string.trial_summary_primary_purpose),
+                    primaryPurpose.phase.toLowerCase().capitalize()
+                )
 
             // todo - add this raw model
             trialSummaryHashMap[App.instance.getString(R.string.trial_summary_anatomic_site)] =
                 Pair(App.instance.getString(R.string.trial_summary_anatomic_site), "Lung")
 
             return SearchResult.TrialSummary(trialSummaryHashMap)
+        }
+
+        private fun mapToSites(): SearchResult.Sites {
+            val locationList = sites.map {
+                SearchResult.Sites.Location(
+                    contactEmail = it.contactEmail,
+                    contactName = it.contactName,
+                    contactPhone = it.contactPhone,
+                    orgName = it.orgName,
+                    orgAddressLineOne = it.orgAddressLine1,
+                    orgCity = it.orgCity,
+                    orgState = it.orgStateOrProvince,
+                    orgZipCode = it.orgPostalCode,
+                    orgCountry = it.orgCountry,
+                    orgCoordinates = SearchResult.Sites.Location.LatLog(
+                        long = it.orgCoordinates?.lon,
+                        lat = it.orgCoordinates?.lat
+                    )
+                )
+            }
+            return SearchResult.Sites(locationList)
         }
 
         private fun mapToAssociatedDisease(): SearchResult.AssociatedDiseases {
@@ -248,13 +276,21 @@ data class SearchResultRaw(
 
             val trialEligibilityHashMap = LinkedHashMap<String, Pair<String, String>>()
 
-            trialEligibilityHashMap[App.instance.getString(R.string.trial_eligibility_gender)] = Pair(App.instance.getString(R.string.trial_eligibility_gender), eligibility.structured.gender.toLowerCase().capitalize())
+            trialEligibilityHashMap[App.instance.getString(R.string.trial_eligibility_gender)] = Pair(
+                App.instance.getString(R.string.trial_eligibility_gender),
+                eligibility.structured.gender.toLowerCase().capitalize()
+            )
 
-            trialEligibilityHashMap[App.instance.getString(R.string.trial_eligibility_min_age)] = Pair(App.instance.getString(R.string.trial_eligibility_min_age), "${eligibility.structured.minAgeInYears}")
+            trialEligibilityHashMap[App.instance.getString(R.string.trial_eligibility_min_age)] = Pair(
+                App.instance.getString(R.string.trial_eligibility_min_age),
+                "${eligibility.structured.minAgeInYears}"
+            )
 
-            val maxAge = if (eligibility.structured.maxAgeInYears == 999) "NA" else "${eligibility.structured.maxAgeInYears}"
+            val maxAge =
+                if (eligibility.structured.maxAgeInYears == 999) "NA" else "${eligibility.structured.maxAgeInYears}"
 
-            trialEligibilityHashMap[App.instance.getString(R.string.trial_eligibility_max_age)] = Pair(App.instance.getString(R.string.trial_eligibility_max_age), maxAge)
+            trialEligibilityHashMap[App.instance.getString(R.string.trial_eligibility_max_age)] =
+                Pair(App.instance.getString(R.string.trial_eligibility_max_age), maxAge)
 
             return SearchResult.EligibilityCriteria(trialEligibilityHashMap)
         }

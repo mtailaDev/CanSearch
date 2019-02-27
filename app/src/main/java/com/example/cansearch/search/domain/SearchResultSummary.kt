@@ -19,13 +19,11 @@ data class SearchResultSummary(
                 principleInvestigator = returnValue(searchResult, R.string.trial_summary_principle_investigator),
                 leadOrganization = returnValue(searchResult, R.string.trial_summary_lead_organization),
                 phase = returnValue(searchResult, R.string.trial_summary_phase),
-                totalSites = "12312 total sites"
+                totalSites = "${searchResult.sites.locations.size} total sites"
             )
 
         private fun returnValue(searchResult: SearchScreen.SearchResult, stringId: Int) : String {
             return searchResult.trialSummary.summaryItems[App.instance.getString(stringId)]!!.second
         }
     }
-
-
 }
