@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<MotionScene xmlns:motion="http://schemas.android.com/apk/res-auto"
+             xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <Transition
+            motion:constraintSetStart="@+id/expanded_test"
+            motion:constraintSetEnd="@+id/collapsed_test"
+            motion:duration="1000">
+        <OnSwipe
+                motion:touchAnchorId="@+id/background"
+                motion:touchAnchorSide="bottom"
+                motion:dragDirection="dragUp"/>
+    </Transition>
+
+
+    <ConstraintSet android:id="@+id/expanded_test">
+
+        <Constraint
+                android:id="@+id/background"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                motion:layout_constraintStart_toStartOf="parent"
+                motion:layout_constraintEnd_toEndOf="parent"
+                motion:layout_constraintTop_toTopOf="parent"
+                motion:layout_constraintBottom_toTopOf="@+id/expanded_background_guide"/>
+
+        <Constraint
+                android:id="@+id/nested"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="16dp"
+                android:layout_marginEnd="16dp"
+                motion:layout_constraintStart_toStartOf="parent"
+                motion:layout_constraintEnd_toEndOf="parent"
+                motion:layout_constraintTop_toTopOf="@+id/expanded_nested_guide"
+                motion:layout_constraintBottom_toBottomOf="parent"
+                android:elevation="1dp"
+                android:background="@android:color/white"/>
+
+
+    </ConstraintSet>
+
+    <ConstraintSet android:id="@+id/collapsed_test">
+
+        <Constraint
+                android:id="@+id/expanded_background_guide"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                motion:layout_constraintStart_toStartOf="parent"
+                motion:layout_constraintEnd_toEndOf="parent"
+                motion:layout_constraintTop_toTopOf="parent"
+                motion:layout_constraintBottom_toTopOf="@+id/collapsed_background_guide"/>
+
+        <Constraint
+                android:id="@+id/nested"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="16dp"
+                android:layout_marginEnd="16dp"
+                android:elevation="1dp"
+                motion:layout_constraintStart_toStartOf="parent"
+                motion:layout_constraintEnd_toEndOf="parent"
+                motion:layout_constraintTop_toTopOf="parent"
+                motion:layout_constraintBottom_toBottomOf="parent"
+                android:background="@android:color/white"/>
+
+    </ConstraintSet>
+
+</MotionScene>
