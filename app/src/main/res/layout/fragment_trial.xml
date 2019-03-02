@@ -6,9 +6,10 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <androidx.constraintlayout.motion.widget.MotionLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            app:layoutDescription="@xml/trial_fragment_scenes">
 
         <View
                 android:id="@+id/background"
@@ -23,14 +24,75 @@
                 android:alpha="0.2"
                 android:visibility="gone"/>
 
+        <View
+                android:id="@+id/trial_collapsing_background"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toBottomOf="@+id/trial_name_value"
+                android:background="@drawable/background_main_gradient"/>
+
+        <View
+                android:id="@+id/trial_collapsing_shadow"
+                android:layout_width="0dp"
+                android:layout_height="4dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/trial_collapsing_background"
+                android:background="@drawable/background_shadow"/>
+
+        <View
+                android:id="@+id/trial_resting_nested_guide"
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toBottomOf="@+id/trial_collapsing_background"
+                android:layout_marginBottom="24dp"/>
+
+        <View
+                android:id="@+id/trial_background_collapsed"
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_marginTop="48dp"/>
+
+        <TextView
+                android:id="@+id/trial_name_title"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:textSize="32sp"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="64dp"
+                android:text="Study Title"
+                android:textColor="@android:color/white" android:fontFamily="serif"/>
+
+        <TextView
+                android:id="@+id/trial_name_value"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="@+id/trial_name_title"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/trial_name_title"
+                android:layout_marginEnd="16dp"
+                android:textSize="18sp"
+                android:layout_marginTop="16dp"
+                android:textColor="@android:color/white"
+                android:paddingBottom="64dp" android:fontFamily="sans-serif"/>
+
         <androidx.core.widget.NestedScrollView
-                xmlns:android="http://schemas.android.com/apk/res/android"
-                xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:id="@+id/nested_scroll"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/trial_resting_nested_guide"
                 app:layout_constraintBottom_toBottomOf="parent"
                 android:scrollbars="none"
                 app:layout_behavior="@string/appbar_scrolling_view_behavior"
@@ -43,7 +105,8 @@
 
                 <com.google.android.material.card.MaterialCardView
                         style="@style/TrialCardView"
-                        android:focusableInTouchMode="true">
+                        android:focusableInTouchMode="true"
+                        android:layout_marginTop="0dp">
 
                     <com.example.cansearch.search.ui.widgets.StudySummaryCompoundView
                             android:id="@+id/trial_study"
@@ -97,15 +160,14 @@
 
         </androidx.core.widget.NestedScrollView>
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.motion.widget.MotionLayout>
 
-    <FrameLayout
-            android:id="@+id/bottom_sheet"
-            app:behavior_peekHeight="0dp"
-            app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:elevation="2dp">
+    <FrameLayout android:id="@+id/bottom_sheet"
+                 app:behavior_peekHeight="0dp"
+                 app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior"
+                 android:layout_width="match_parent"
+                 android:layout_height="match_parent"
+                 android:elevation="2dp">
 
         <include layout="@layout/trial_detail_bottom_sheet"/>
 
