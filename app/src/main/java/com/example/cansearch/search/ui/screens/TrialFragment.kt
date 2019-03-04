@@ -16,6 +16,7 @@ import com.google.android.material.bottomsheet.BottomSheetBehavior
 import kotlinx.android.synthetic.main.fragment_trial.*
 import kotlinx.android.synthetic.main.study_summary_compound.*
 import kotlinx.android.synthetic.main.trial_detail_bottom_sheet.*
+import kotlinx.android.synthetic.main.trials_summary_compound.*
 
 class TrialFragment : Fragment() {
 
@@ -74,10 +75,13 @@ class TrialFragment : Fragment() {
 
     private fun setOnClickListeners() {
         study_summary_scientific_detail_btn.setOnClickListener {
-
             scientific_title.text = selectedTrial.studySummary.scientificTitle
             scientific_description.text = selectedTrial.studySummary.scientificDescription
             sheetBehavior.state = BottomSheetBehavior.STATE_EXPANDED
+        }
+        trial_summary_locations_btn.setOnClickListener {
+            val parentActivity = activity as TrialActivity
+            parentActivity.showLocation()
         }
     }
 
@@ -116,5 +120,12 @@ class TrialFragment : Fragment() {
 
     private fun showStudySummary(studySummary: SearchScreen.SearchResult.StudySummary) {
         trial_study.setData(studySummary)
+    }
+
+    companion object {
+        @JvmStatic
+        fun newInstance(): TrialFragment{
+            return TrialFragment()
+        }
     }
 }
