@@ -43,9 +43,7 @@
             android:id="@+id/trial_summary_locations_total"
             style="@style/TrialContainerTitle"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/trial_summary_locations_btn"
-            app:layout_constraintBottom_toBottomOf="@+id/trial_summary_locations_btn"
-            android:text="131 Locations"/>
+            app:layout_constraintTop_toTopOf="@+id/study_summary_scientific_detail_btn"
+            app:layout_constraintBottom_toBottomOf="@+id/study_summary_scientific_detail_btn"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
-

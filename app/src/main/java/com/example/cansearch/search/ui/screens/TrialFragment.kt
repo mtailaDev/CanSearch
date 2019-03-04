@@ -40,7 +40,7 @@ class TrialFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         setTitle(selectedTrial.studySummary)
         showStudySummary(selectedTrial.studySummary)
-        showTrialSummary(selectedTrial.trialSummary)
+        showTrialSummary(selectedTrial.trialSummary, selectedTrial.sites)
         showEligibilityCriteria(selectedTrial.eligibility)
         showAssociatedDiseases(selectedTrial.associatedDiseases)
         showAssociatedBiomarkers(selectedTrial.associatedBiomarkers)
@@ -51,6 +51,10 @@ class TrialFragment : Fragment() {
 
     private fun setTitle(studySummary: SearchScreen.SearchResult.StudySummary) {
         trial_name_value.text = studySummary.briefTitle
+    }
+
+    private fun showTrialSummary(trialSummary: SearchScreen.SearchResult.TrialSummary, sites: SearchScreen.SearchResult.Sites) {
+        trial_summary.setData(trialSummary, sites.locations.size)
     }
 
     private fun setBottomSheetListener() {
@@ -71,7 +75,6 @@ class TrialFragment : Fragment() {
             }
         })
     }
-
 
     private fun setOnClickListeners() {
         study_summary_scientific_detail_btn.setOnClickListener {
@@ -112,10 +115,6 @@ class TrialFragment : Fragment() {
 
     private fun showEligibilityCriteria(eligibility: SearchScreen.SearchResult.EligibilityCriteria) {
         trial_eligibility.showData(eligibility)
-    }
-
-    private fun showTrialSummary(trialSummary: SearchScreen.SearchResult.TrialSummary) {
-        trial_summary.setData(trialSummary)
     }
 
     private fun showStudySummary(studySummary: SearchScreen.SearchResult.StudySummary) {
