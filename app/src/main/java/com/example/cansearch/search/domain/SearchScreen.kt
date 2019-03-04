@@ -16,7 +16,8 @@ data class SearchScreen(val totalResults: Int, val searchResults: List<SearchRes
         val trialSummary: TrialSummary,
         val associatedDiseases: AssociatedDiseases,
         val associatedBiomarkers: AssociatedBiomarkers,
-        val eligibility: EligibilityCriteria
+        val eligibility: EligibilityCriteria,
+        val sites: Sites
     ) : Parcelable {
 
         @Parcelize
@@ -26,6 +27,31 @@ data class SearchScreen(val totalResults: Int, val searchResults: List<SearchRes
             val scientificTitle: String,
             val scientificDescription: String
         ) : Parcelable
+
+        @Parcelize
+        data class Sites(
+            val locations: List<Location>
+        ) : Parcelable {
+            @Parcelize
+            data class Location(
+                val contactEmail: String?,
+                val contactName: String?,
+                val contactPhone: String?,
+                val orgName: String?,
+                val orgAddressLineOne: String?,
+                val orgCity: String?,
+                val orgState: String?,
+                val orgZipCode: String?,
+                val orgCountry: String?,
+                val orgCoordinates: LatLog?
+            ) : Parcelable {
+                @Parcelize
+                data class LatLog(
+                    val long: Double?,
+                    val lat: Double?
+                ) : Parcelable
+            }
+        }
 
         @Parcelize
         data class AssociatedBiomarkers(

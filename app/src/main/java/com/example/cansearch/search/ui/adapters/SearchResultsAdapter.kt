@@ -11,11 +11,8 @@ import android.view.animation.AccelerateDecelerateInterpolator
 import android.view.animation.OvershootInterpolator
 import androidx.recyclerview.widget.RecyclerView
 import com.example.cansearch.R
-import com.example.cansearch.core.domain.RemoteError
-import com.example.cansearch.core.domain.Result
 import com.example.cansearch.search.domain.SearchResultSummary
 import com.example.cansearch.search.domain.SearchScreen
-import com.example.cansearch.search.ui.SearchListItem
 import kotlinx.android.synthetic.main.item_list_search.view.*
 
 class SearchResultsAdapter(
@@ -79,8 +76,6 @@ class SearchResultsAdapter(
             itemView.search_result_leading_organization.text = result.leadOrganization
             itemView.search_result_location.text = result.totalSites
             itemView.search_result_phase_status.text = result.phase
-
-            // todo - check against cached list for matching nci ID's - display correct icon
         }
 
         fun setIcon(saved: Boolean) {

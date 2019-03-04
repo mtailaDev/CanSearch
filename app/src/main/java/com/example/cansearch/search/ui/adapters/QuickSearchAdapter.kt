@@ -9,7 +9,7 @@ import com.example.cansearch.R
 import kotlinx.android.synthetic.main.item_list_quick_search.view.*
 
 
-class QuickSearchAdapter(val quickSearchList: List<String>) : RecyclerView.Adapter<QuickSearchAdapter.ViewHolder>() {
+class QuickSearchAdapter(private val quickSearchList: List<String>) : RecyclerView.Adapter<QuickSearchAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val inflater = LayoutInflater.from(parent.context)
