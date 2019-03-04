@@ -7,58 +7,38 @@
         android:paddingBottom="8dp">
 
     <TextView
-            android:id="@+id/study_summary_card_title"
-            style="@style/TrialContainerTitle"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:text="@string/trial_detail_summary_title"/>
-
-    <View
-            android:id="@+id/study_summary_title_divider"
-            style="@style/TrialContainerTitleDivider"
-            app:layout_constraintStart_toStartOf="@+id/study_summary_card_title"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/study_summary_card_title"/>
-
-    <TextView
-            android:id="@+id/study_summary_study_title"
-            style="@style/SummaryTitle"
-            android:textAppearance="@style/SummaryTitleTextAppearance"
-            app:layout_constraintStart_toStartOf="@+id/study_summary_card_title"
-            app:layout_constraintTop_toBottomOf="@+id/study_summary_title_divider"
-            android:text="@string/trial_detail_study_title"/>
-
-    <TextView
-            android:id="@+id/study_summary_title"
-            style="@style/SummaryTitleValue"
-            android:textAppearance="@style/SummaryTitleValueTextAppearance"
-            app:layout_constraintStart_toStartOf="@+id/study_summary_card_title"
-            app:layout_constraintTop_toBottomOf="@+id/study_summary_study_title"
-            app:layout_constraintEnd_toEndOf="parent"/>
-
-    <TextView
             android:id="@+id/study_summary_description_title"
             style="@style/SummaryTitle"
             android:textAppearance="@style/SummaryTitleTextAppearance"
-            app:layout_constraintStart_toStartOf="@+id/study_summary_card_title"
-            app:layout_constraintTop_toBottomOf="@+id/study_summary_title"
-            android:text="@string/trial_detail_study_description"/>
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginTop="32dp"
+            android:layout_marginStart="24dp"
+            android:text="Description"
+            android:textColor="#173048"
+            android:textAllCaps="true"
+            android:textSize="16sp" android:fontFamily="sans-serif-light"/>
 
     <TextView
             android:id="@+id/study_summary_description"
             style="@style/SummaryTitleValue"
             android:textAppearance="@style/SummaryTitleValueTextAppearance"
-            app:layout_constraintStart_toStartOf="@+id/study_summary_card_title"
+            app:layout_constraintStart_toStartOf="@+id/study_summary_description_title"
             app:layout_constraintTop_toBottomOf="@+id/study_summary_description_title"
-            app:layout_constraintEnd_toEndOf="parent"/>
+            android:layout_marginEnd="24dp"
+            android:textColor="#173048"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toEndOf="parent" android:fontFamily="sans-serif-thin"/>
 
     <com.google.android.material.button.MaterialButton
             android:id="@+id/study_summary_scientific_detail_btn"
             style="@style/PrimaryButton"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/study_summary_description"
             android:layout_marginTop="16dp"
+            android:layout_marginStart="32dp"
+            android:layout_marginEnd="32dp"
             android:text="@string/trial_detail_scientific_detail"/>
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

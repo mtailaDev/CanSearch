@@ -15,7 +15,6 @@ class StudySummaryCompoundView @JvmOverloads constructor(context: Context, attrs
     }
 
     fun setData(studySummary: SearchScreen.SearchResult.StudySummary) {
-        study_summary_title.text = studySummary.briefTitle
         study_summary_description.text = studySummary.briefDescription
     }
 }

@@ -37,6 +37,7 @@ class TrialFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        setTitle(selectedTrial.studySummary)
         showStudySummary(selectedTrial.studySummary)
         showTrialSummary(selectedTrial.trialSummary, selectedTrial.sites)
         showEligibilityCriteria(selectedTrial.eligibility)
@@ -47,22 +48,26 @@ class TrialFragment : Fragment() {
         setOnClickListeners()
     }
 
+    private fun setTitle(studySummary: SearchScreen.SearchResult.StudySummary) {
+        trial_name_value.text = studySummary.briefTitle
+    }
+
     private fun showTrialSummary(trialSummary: SearchScreen.SearchResult.TrialSummary, sites: SearchScreen.SearchResult.Sites) {
         trial_summary.setData(trialSummary, sites.locations.size)
     }
 
     private fun setBottomSheetListener() {
-        sheetBehavior.setBottomSheetCallback(object : BottomSheetBehavior.BottomSheetCallback(){
+        sheetBehavior.setBottomSheetCallback(object : BottomSheetBehavior.BottomSheetCallback() {
             override fun onSlide(p0: View, p1: Float) {
             }
 
             override fun onStateChanged(p0: View, newState: Int) {
-                when(newState){
+                when (newState) {
                     BottomSheetBehavior.STATE_SETTLING,
-                    BottomSheetBehavior.STATE_EXPANDED ->{
+                    BottomSheetBehavior.STATE_EXPANDED -> {
                         background.visible()
                     }
-                    BottomSheetBehavior.STATE_COLLAPSED ->{
+                    BottomSheetBehavior.STATE_COLLAPSED -> {
                         background.gone()
                     }
                 }
