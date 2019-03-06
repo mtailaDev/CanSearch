@@ -44,7 +44,7 @@ data class SearchScreen(val totalResults: Int, val searchResults: List<SearchRes
                 val orgZipCode: String?,
                 val orgCountry: String?,
                 val orgCoordinates: LatLog?
-            ) : Parcelable {
+            ) : TrialSite(),  Parcelable {
                 @Parcelize
                 data class LatLog(
                     val long: Double?,
