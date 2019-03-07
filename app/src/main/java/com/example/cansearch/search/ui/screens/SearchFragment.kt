@@ -38,6 +38,7 @@ class SearchFragment : Fragment(), SearchResultsAdapter.onArchiveClickHandler {
         return true
     }
 
+    // todo clean this
     override fun onTrialSelected(selectedTrial: SearchScreen.SearchResult) {
 
         val x = activity as HomeActivity
