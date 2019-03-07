@@ -6,10 +6,13 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.cansearch.R
 import com.example.cansearch.search.domain.SearchScreen
 import com.example.cansearch.search.domain.SiteHeader
 import com.example.cansearch.search.domain.TrialSite
+import com.example.cansearch.search.ui.adapters.LocationsAdapter
+import kotlinx.android.synthetic.main.fragment_site_location.*
 
 
 class SiteLocationFragment : Fragment() {
@@ -22,11 +25,10 @@ class SiteLocationFragment : Fragment() {
         activity.let {
             parentViewModel = ViewModelProviders.of(it!!)[TrialActivityViewModel::class.java]
             selectedTrial = parentViewModel.selectedTrial.value!!
-            sortLocations()
         }
     }
 
-    private fun sortLocations() {
+    private fun sortLocations() :MutableList<TrialSite>{
         val trialSiteList = mutableListOf<TrialSite>()
 
         val sortedList = selectedTrial.sites.locations.groupBy { it.orgCountry }.toList().sortedBy { it.first }
@@ -34,17 +36,11 @@ class SiteLocationFragment : Fragment() {
             trialSiteList.add(SiteHeader(grouped.first))
             trialSiteList.addAll(sortStates(grouped.second))
         }
-
-        // todo - clean
-//        trialSiteList.forEach {
-//            if (it is SiteHeader) {
-//                Log.i("Header", it.title)
-//            } else if (it is SearchScreen.SearchResult.Sites.Location) {
-//                Log.i("state", "${it.orgState}, ${it.orgCity}")
-//            }
-//        }
+        return trialSiteList
     }
 
+    // todo - might be able to utilize comparator
+    // todo - delegate to location.state <String?>
     private fun sortStates(test: List<SearchScreen.SearchResult.Sites.Location>): MutableList<SearchScreen.SearchResult.Sites.Location> {
         val trialSiteList = mutableListOf<SearchScreen.SearchResult.Sites.Location>()
         val groupedStates = test.groupBy { it.orgState }
@@ -57,6 +53,13 @@ class SiteLocationFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_site_location, container, false)
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        val adapter = LocationsAdapter(sortLocations())
+        locations_rv.adapter = adapter
+        locations_rv.layoutManager = LinearLayoutManager(context)
     }
 
     companion object {
