@@ -13,7 +13,10 @@
     <color name="line_break_secondary">#EAEAEA</color>
 
     <!--// chips-->
-    <color name="chip_color_disease">#FF635B</color>
+    <color name="chip_color_disease_background">#1A24C9B2</color>
+    <color name="chip_color_disease_stroke">#24C9B2</color>
+    <color name="chip_color_genes_background">#1A5463FA</color>
+    <color name="chip_color_gene_stroke">#4D69F1</color>
     <color name="chip_color_biomarkers">#07A080</color>
 
 </resources>

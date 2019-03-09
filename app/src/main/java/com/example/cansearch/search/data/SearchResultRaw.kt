@@ -263,12 +263,12 @@ data class SearchResultRaw(
         }
 
         private fun mapToAssociatedDisease(): SearchResult.AssociatedDiseases {
-            val diseaseList = diseases.map { "${it.associatedDiseaseName}" }
+            val diseaseList = diseases.map { SearchResult.AssociatedDiseases.Disease(it.associatedDiseaseName)}
             return SearchResult.AssociatedDiseases(diseaseList)
         }
 
-        private fun mapToAssociatedGenes(): SearchScreen.SearchResult.AssociatedBiomarkers {
-            val associatedBiomarkers = biomarkers?.map { "${it.name}" }
+        private fun mapToAssociatedGenes(): SearchScreen.SearchResult.AssociatedBiomarkers? {
+            val associatedBiomarkers = biomarkers?.map { SearchResult.AssociatedBiomarkers.BioMarkers(it.name)}
             return SearchScreen.SearchResult.AssociatedBiomarkers(associatedBiomarkers)
         }
 
