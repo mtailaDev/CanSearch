@@ -6,32 +6,18 @@
         android:layout_height="wrap_content"
         android:paddingBottom="8dp">
 
-    <!--// todo - add styles -->
     <TextView
             android:id="@+id/trial_summary_card_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginBottom="16dp"
+            style="@style/SectionHeaderAppearance"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            android:textSize="16sp"
-            android:fontFamily="sans-serif-light"
-            android:textColor="@color/title_text_primary"
-            android:textAllCaps="true"
-            android:textStyle="bold"
-            android:text="@string/trial_detail_trial_title"/>
+            android:text="@string/card_title_trial_summary"/>
 
-    <!--// todo - add styles -->
     <View
-            android:layout_width="24dp"
-            android:layout_height="2dp"
+            style="@style/SectionHeaderAccentView"
             app:layout_constraintTop_toTopOf="@+id/trial_summary_card_title"
             app:layout_constraintBottom_toBottomOf="@+id/trial_summary_card_title"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginEnd="24dp"
-            android:background="@color/title_text_primary"/>
+            app:layout_constraintEnd_toEndOf="parent"/>
 
     <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/trial_summary_recycler_view"

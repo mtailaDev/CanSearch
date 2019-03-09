@@ -11,6 +11,13 @@
     <string name="onboarding_contact_title">Contact</string>
     <string name="onboarding_contact_description">For clinical trials that provide contact information, you can easily Email or Phone the Director of Research for trials of interest</string>
 
+    <!--// card title-->
+    <string name="card_title_study_title">Study Title</string>
+    <string name="card_title_study_description">Description</string>
+    <string name="card_title_trial_summary">Trial Summary</string>
+    <string name="card_title_eligibility">Eligibility</string>
+    <string name="card_title_related">Related</string>
+
     <!--// search fragment-->
     <string-array name="quickSearch">
         <item>Non-Melanoma Skin Cancer</item>
