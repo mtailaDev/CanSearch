@@ -11,11 +11,11 @@ import com.example.cansearch.search.domain.SearchScreen
 import com.google.android.material.chip.Chip
 import kotlinx.android.synthetic.main.associated_disease_info_compound.view.*
 
-
 class AssociatedDiseaseInfoCompoundView @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
-    defStyleAttr: Int = 0) : ConstraintLayout(context, attrs, defStyleAttr) {
+    defStyleAttr: Int = 0
+) : ConstraintLayout(context, attrs, defStyleAttr) {
 
     var diseaseExtraExpanded = false
 
@@ -24,7 +24,6 @@ class AssociatedDiseaseInfoCompoundView @JvmOverloads constructor(
     }
 
     fun setData(diseaseExtras: List<DiseaseExtras>) {
-
         diseaseExtras.forEach {
             val chip = Chip(context)
             chip.chipStrokeWidth = 2f
@@ -41,39 +40,9 @@ class AssociatedDiseaseInfoCompoundView @JvmOverloads constructor(
             }
             disease_extra_chip_group.addView(chip)
         }
-
-
-        // todo - will still need to do this later once I filter common disease types
-//        if (associatedData?.size!! > MAX_LIST_SIZE) {
-//            setChipGroup(chipColor, associatedData.subList(0, 19))
-//            study_associated_btn.visible()
-//        } else {
-//            setChipGroup(chipColor, associatedData)
-//            study_associated_btn.gone()
-//        }
     }
 
-    fun clearChipGroup(){
+    fun clearChipGroup() {
         disease_extra_chip_group.removeAllViews()
-    }
-
-
-//    fun setData(chipColor: Int, associatedData: List<String>?, chipType: ChipType) {
-//
-//        this.chipType = chipType
-//
-//
-//        // todo - will still need to do this later once I filter common disease types
-////        if (associatedData?.size!! > MAX_LIST_SIZE) {
-////            setChipGroup(chipColor, associatedData.subList(0, 19))
-////            study_associated_btn.visible()
-////        } else {
-////            setChipGroup(chipColor, associatedData)
-////            study_associated_btn.gone()
-////        }
-//    }
-
-    companion object {
-        const val MAX_LIST_SIZE = 20
     }
 }

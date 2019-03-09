@@ -14,17 +14,9 @@
 
     <TextView
             android:id="@+id/eligibility_value"
-            style="@style/TrialContainerTitle"
+            style="@style/TrialListItemValueAppearance"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:ellipsize="end"
-            android:textAlignment="viewEnd"
-            android:textColor="#173048"
-            android:fontFamily="sans-serif-light"
-            android:textStyle="bold"
-            android:maxLines="1"
-            android:layout_marginEnd="16dp"
-            android:layout_marginStart="16dp"/>
+            app:layout_constraintTop_toTopOf="@+id/eligibility_title"/>
 
     <View
             android:id="@+id/item_divider"
