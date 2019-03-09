@@ -42,3 +42,4 @@
             android:text="@string/trial_detail_scientific_detail"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
+

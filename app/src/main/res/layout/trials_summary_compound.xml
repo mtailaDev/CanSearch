@@ -6,19 +6,32 @@
         android:layout_height="wrap_content"
         android:paddingBottom="8dp">
 
+    <!--// todo - add styles -->
     <TextView
             android:id="@+id/trial_summary_card_title"
-            style="@style/TrialContainerTitle"
-            app:layout_constraintStart_toStartOf="parent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginBottom="16dp"
             app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:textSize="16sp"
+            android:fontFamily="sans-serif-light"
+            android:textColor="@color/title_text_primary"
+            android:textAllCaps="true"
+            android:textStyle="bold"
             android:text="@string/trial_detail_trial_title"/>
 
+    <!--// todo - add styles -->
     <View
-            android:id="@+id/trial_summary_title_divider"
-            style="@style/TrialContainerTitleDivider"
-            app:layout_constraintStart_toStartOf="@+id/trial_summary_card_title"
+            android:layout_width="24dp"
+            android:layout_height="2dp"
+            app:layout_constraintTop_toTopOf="@+id/trial_summary_card_title"
+            app:layout_constraintBottom_toBottomOf="@+id/trial_summary_card_title"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/trial_summary_card_title"/>
+            android:layout_marginEnd="24dp"
+            android:background="@color/title_text_primary"/>
 
     <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/trial_summary_recycler_view"
@@ -26,24 +39,22 @@
             android:layout_height="wrap_content"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/trial_summary_title_divider"/>
+            android:layout_marginTop="8dp"
+            app:layout_constraintTop_toBottomOf="@+id/trial_summary_card_title"/>
 
+    <!--// todo - add styles -->
     <com.google.android.material.button.MaterialButton
             android:id="@+id/trial_summary_locations_btn"
             style="@style/PrimaryButton"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="16dp"
+            android:layout_marginStart="32dp"
+            android:layout_marginEnd="32dp"
             android:paddingStart="48dp"
             android:paddingEnd="48dp"
-            android:layout_marginEnd="24dp"
             app:layout_constraintTop_toBottomOf="@+id/trial_summary_recycler_view"
             app:layout_constraintBottom_toBottomOf="parent"
-            android:text="Locations"/>
-
-    <TextView
-            android:id="@+id/trial_summary_locations_total"
-            style="@style/TrialContainerTitle"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/study_summary_scientific_detail_btn"
-            app:layout_constraintBottom_toBottomOf="@+id/study_summary_scientific_detail_btn"/>
+            android:text="View Locations"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

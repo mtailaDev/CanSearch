@@ -54,7 +54,7 @@ class TrialFragment : Fragment() {
     }
 
     private fun showTrialSummary(trialSummary: SearchScreen.SearchResult.TrialSummary, sites: SearchScreen.SearchResult.Sites) {
-        trial_summary.setData(trialSummary, sites.locations.size)
+        trial_summary.setData(trialSummary)
     }
 
     private fun setBottomSheetListener() {
