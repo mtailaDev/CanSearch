@@ -10,9 +10,10 @@ import androidx.lifecycle.ViewModelProviders
 import com.example.cansearch.R
 import com.example.cansearch.core.gone
 import com.example.cansearch.core.visible
+import com.example.cansearch.search.domain.DiseaseExtras
 import com.example.cansearch.search.domain.SearchScreen
-import com.example.cansearch.search.ui.widgets.AssociatedDiseaseInfoCompoundView
 import com.google.android.material.bottomsheet.BottomSheetBehavior
+import kotlinx.android.synthetic.main.associated_disease_info_compound.*
 import kotlinx.android.synthetic.main.fragment_trial.*
 import kotlinx.android.synthetic.main.study_summary_compound.*
 import kotlinx.android.synthetic.main.trial_detail_bottom_sheet.*
@@ -23,6 +24,8 @@ class TrialFragment : Fragment() {
     private lateinit var sheetBehavior: BottomSheetBehavior<FrameLayout>
     private lateinit var parentViewModel: TrialActivityViewModel
     private lateinit var selectedTrial: SearchScreen.SearchResult
+    private var fullDiseaseExtras = ArrayList<DiseaseExtras>()
+    private var trimmedDiseaseExtras = emptyList<DiseaseExtras>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -42,8 +45,8 @@ class TrialFragment : Fragment() {
         showStudySummary(selectedTrial.studySummary)
         showTrialSummary(selectedTrial.trialSummary, selectedTrial.sites)
         showEligibilityCriteria(selectedTrial.eligibility)
-        showAssociatedDiseases(selectedTrial.associatedDiseases)
-        showAssociatedBiomarkers(selectedTrial.associatedBiomarkers)
+        showDiseaseExtras(selectedTrial.associatedBiomarkers, selectedTrial.associatedDiseases)
+
         sheetBehavior = BottomSheetBehavior.from<FrameLayout>(bottom_sheet)
         setBottomSheetListener()
         setOnClickListeners()
@@ -53,7 +56,10 @@ class TrialFragment : Fragment() {
         trial_name_value.text = studySummary.briefTitle
     }
 
-    private fun showTrialSummary(trialSummary: SearchScreen.SearchResult.TrialSummary, sites: SearchScreen.SearchResult.Sites) {
+    private fun showTrialSummary(
+        trialSummary: SearchScreen.SearchResult.TrialSummary,
+        sites: SearchScreen.SearchResult.Sites
+    ) {
         trial_summary.setData(trialSummary)
     }
 
@@ -86,31 +92,37 @@ class TrialFragment : Fragment() {
             val parentActivity = activity as TrialActivity
             parentActivity.showLocation()
         }
+        disease_extra_show_more.setOnClickListener {
+            trial_associated_genes.clearChipGroup()
+            if (trial_associated_genes.diseaseExtraExpanded) {
+                trial_associated_genes.diseaseExtraExpanded = false
+                trial_associated_genes.setData(trimmedDiseaseExtras)
+                disease_extra_show_more.rotation = 90f
+            } else {
+                trial_associated_genes.diseaseExtraExpanded = true
+                trial_associated_genes.setData(fullDiseaseExtras)
+                disease_extra_show_more.rotation = -90f
+            }
+        }
     }
 
-    private fun showAssociatedBiomarkers(associatedBiomarkers: SearchScreen.SearchResult.AssociatedBiomarkers) {
-        context.let {
-            trial_associated_genes.setCardTitle(it!!.getString(R.string.trial_detail_associated_genes_title))
-        }
-        if (associatedBiomarkers.biomarkers != null) {
-            trial_associated_genes.setData(
-                chipColor = R.color.chip_color_biomarkers,
-                associatedData = associatedBiomarkers.biomarkers,
-                chipType = AssociatedDiseaseInfoCompoundView.ChipType.BIOMARKERS
-            )
+    private fun showDiseaseExtras(
+        associatedBiomarkers: SearchScreen.SearchResult.AssociatedBiomarkers?,
+        associatedDiseases: SearchScreen.SearchResult.AssociatedDiseases
+    ) {
+        if (associatedBiomarkers?.biomarkers != null) {
+            fullDiseaseExtras.addAll(associatedBiomarkers.biomarkers)
+            // todo - filter common diseases
+            fullDiseaseExtras.addAll(associatedDiseases.associatedDiseases)
+            fullDiseaseExtras.shuffle()
+
+            if (fullDiseaseExtras.size > 10) {
+                trimmedDiseaseExtras = fullDiseaseExtras.subList(0, 10)
+                trial_associated_genes.setData(trimmedDiseaseExtras)
+            } else {
+                trial_associated_genes.setData(fullDiseaseExtras)
+            }
         } else trial_associated_genes.gone()
-
-    }
-
-    private fun showAssociatedDiseases(associatedDiseases: SearchScreen.SearchResult.AssociatedDiseases) {
-        context?.let {
-            trial_disease.setCardTitle(it.getString(R.string.trial_detail_associated_disease_title))
-            trial_disease.setData(
-                chipColor = R.color.chip_color_disease,
-                associatedData = associatedDiseases.associatedDiseases,
-                chipType = AssociatedDiseaseInfoCompoundView.ChipType.DISEASE
-            )
-        }
     }
 
     private fun showEligibilityCriteria(eligibility: SearchScreen.SearchResult.EligibilityCriteria) {
@@ -123,8 +135,9 @@ class TrialFragment : Fragment() {
 
     companion object {
         @JvmStatic
-        fun newInstance(): TrialFragment{
+        fun newInstance(): TrialFragment {
             return TrialFragment()
         }
     }
 }
+

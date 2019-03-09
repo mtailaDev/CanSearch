@@ -71,7 +71,8 @@
                 android:layout_marginStart="24dp"
                 android:layout_marginTop="64dp"
                 android:text="Study Title"
-                android:textColor="@android:color/white" android:fontFamily="serif"/>
+                android:textColor="@android:color/white"
+                android:fontFamily="serif"/>
 
         <TextView
                 android:id="@+id/trial_name_value"
@@ -84,7 +85,8 @@
                 android:textSize="18sp"
                 android:layout_marginTop="16dp"
                 android:textColor="@android:color/white"
-                android:paddingBottom="64dp" android:fontFamily="sans-serif"/>
+                android:paddingBottom="64dp"
+                android:fontFamily="sans-serif"/>
 
         <androidx.core.widget.NestedScrollView
                 android:id="@+id/nested_scroll"
@@ -123,32 +125,20 @@
                         android:layout_marginEnd="16dp"
                         android:layout_marginStart="16dp"/>
 
-                <com.google.android.material.card.MaterialCardView
-                        style="@style/TrialCardView">
-
-                    <com.example.cansearch.search.ui.widgets.AssociatedDiseaseInfoCompoundView
-                            android:id="@+id/trial_disease"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"/>
-
-                </com.google.android.material.card.MaterialCardView>
-
-                <com.google.android.material.card.MaterialCardView
-                        style="@style/TrialCardView">
-
-                    <com.example.cansearch.search.ui.widgets.AssociatedDiseaseInfoCompoundView
-                            android:id="@+id/trial_associated_genes"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"/>
-
-                </com.google.android.material.card.MaterialCardView>
+                <com.example.cansearch.search.ui.widgets.EligibilityCompoundView
+                        android:id="@+id/trial_eligibility"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginEnd="16dp"
+                        android:layout_marginStart="16dp"/>
 
                 <com.google.android.material.card.MaterialCardView
                         style="@style/TrialCardView"
                         android:layout_marginBottom="16dp">
 
-                    <com.example.cansearch.search.ui.widgets.EligibilityCompoundView
-                            android:id="@+id/trial_eligibility"
+                    <com.example.cansearch.search.ui.widgets.AssociatedDiseaseInfoCompoundView
+                            android:id="@+id/trial_associated_genes"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"/>
 
