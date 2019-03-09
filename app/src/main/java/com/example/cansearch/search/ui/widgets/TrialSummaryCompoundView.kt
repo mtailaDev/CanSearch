@@ -26,13 +26,8 @@ class TrialSummaryCompoundView @JvmOverloads constructor(
         trial_summary_recycler_view.layoutManager = LinearLayoutManager(context)
     }
 
-    fun setData(trialSummary: SearchScreen.SearchResult.TrialSummary, totalSites: Int) {
+    fun setData(trialSummary: SearchScreen.SearchResult.TrialSummary) {
         val trialSummaryList = trialSummary.summaryItems.map { TrialSummaryItem(it.value.first, it.value.second) }
         setSummaryRecyclerView(trialSummaryList)
-        setNumberOfLocations("$totalSites")
-    }
-
-    private fun setNumberOfLocations(totalSites: String) {
-        trial_summary_locations_total.text = "$totalSites locations"
     }
 }
