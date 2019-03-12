@@ -12,12 +12,9 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.cansearch.R
 import com.example.cansearch.search.domain.SearchScreen
-import com.example.cansearch.search.domain.TrialSite
 import com.example.cansearch.search.ui.adapters.LocationsAdapter
 import io.reactivex.Observable
-import io.reactivex.ObservableOnSubscribe
 import kotlinx.android.synthetic.main.fragment_site_location.*
-
 
 class SiteLocationFragment : Fragment() {
 
@@ -61,7 +58,6 @@ class SiteLocationFragment : Fragment() {
     }
 
     private fun setSearchListener(): Observable<String> {
-
         return Observable.create { subscriber ->
             locations_search_et.addTextChangedListener(object : TextWatcher {
                 override fun afterTextChanged(p0: Editable?) {
@@ -71,7 +67,7 @@ class SiteLocationFragment : Fragment() {
                 }
 
                 override fun onTextChanged(chars: CharSequence?, p1: Int, p2: Int, p3: Int) {
-                        subscriber.onNext(chars.toString())
+                    subscriber.onNext(chars.toString())
                 }
             })
         }

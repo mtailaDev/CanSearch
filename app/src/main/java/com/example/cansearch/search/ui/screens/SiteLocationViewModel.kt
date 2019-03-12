@@ -14,6 +14,7 @@ class SiteLocationViewModel : ViewModel() {
 
     // todo - create base viewModel class to avoid calling onCleared everytime (see below)
     // todo - https://proandroiddev.com/managing-disposables-in-rxjava-2-the-less-bad-version-b3ff2b0b72a2
+    // todo - also might be able to debounce some of the textWatcher logic to avoid CPU overload filtering shit
 
     private val compositeDisposable = CompositeDisposable()
     private var searchList = mutableListOf<SearchScreen.SearchResult.Sites.Location>()
