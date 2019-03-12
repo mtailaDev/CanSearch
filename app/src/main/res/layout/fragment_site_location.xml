@@ -71,7 +71,6 @@
             android:textSize="32sp"
             android:layout_marginStart="24dp"
             android:layout_marginTop="24dp"
-            android:text="123 Locations"
             android:textColor="@android:color/white"
             android:paddingBottom="56dp"
             android:fontFamily="serif"/>

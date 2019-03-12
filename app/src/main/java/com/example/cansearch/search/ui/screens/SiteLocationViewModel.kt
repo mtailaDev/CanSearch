@@ -20,6 +20,7 @@ class SiteLocationViewModel : ViewModel() {
     private var searchList = mutableListOf<SearchScreen.SearchResult.Sites.Location>()
     val trialList = MutableLiveData<List<TrialSite>>()
     val trimmedList = MutableLiveData<List<TrialSite>>()
+    val locationTotal = MutableLiveData<String>()
     private lateinit var textWatcherObservable: Observable<String>
 
     override fun onCleared() {
@@ -67,6 +68,8 @@ class SiteLocationViewModel : ViewModel() {
         trialSiteList.forEach {
             if (it is SearchScreen.SearchResult.Sites.Location) searchList.add(it)
         }
+        // todo - string resource this with value
+        locationTotal.value = "${searchList.size} Locations"
     }
 
     // todo - might be able to utilize comparator -delegate to location.state <String?>

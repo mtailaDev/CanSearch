@@ -55,6 +55,9 @@ class SiteLocationFragment : Fragment() {
             adapter.sites = it
             adapter.notifyDataSetChanged()
         })
+        siteLocationViewModel.locationTotal.observe(this, Observer {
+            locations_total_tv.text = it
+        })
     }
 
     private fun setSearchListener(): Observable<String> {
