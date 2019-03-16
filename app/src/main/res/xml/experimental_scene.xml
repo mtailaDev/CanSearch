@@ -1,15 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<MotionScene xmlns:motion="http://schemas.android.com/apk/res-auto"
-             xmlns:android="http://schemas.android.com/apk/res/android">
+<MotionScene 
+             xmlns:android="http://schemas.android.com/apk/res/android"
+             xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <Transition
-            motion:constraintSetStart="@+id/expanded_test"
-            motion:constraintSetEnd="@+id/collapsed_test"
-            motion:duration="1000">
+            app:constraintSetStart="@+id/expanded_test"
+            app:constraintSetEnd="@+id/collapsed_test"
+            app:duration="1000">
         <OnSwipe
-                motion:touchAnchorId="@+id/background"
-                motion:touchAnchorSide="bottom"
-                motion:dragDirection="dragUp"/>
+                app:touchAnchorId="@+id/background"
+                app:touchAnchorSide="bottom"
+                app:dragDirection="dragUp"/>
     </Transition>
 
 
@@ -19,23 +20,39 @@
                 android:id="@+id/background"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
-                motion:layout_constraintStart_toStartOf="parent"
-                motion:layout_constraintEnd_toEndOf="parent"
-                motion:layout_constraintTop_toTopOf="parent"
-                motion:layout_constraintBottom_toTopOf="@+id/expanded_background_guide"/>
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toTopOf="@+id/expanded_background_guide"/>
+        
+        <Constraint
+                android:id="@+id/cardView"
+                android:layout_width="0dp"
+                android:layout_height="48dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/collapsed_background_guide">
+            <CustomAttribute
+                    app:attributeName="radius"
+                    app:customFloatValue="60"/>
+
+
+        </Constraint>
 
         <Constraint
                 android:id="@+id/nested"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginBottom="16dp"
-                android:layout_marginEnd="16dp"
-                motion:layout_constraintStart_toStartOf="parent"
-                motion:layout_constraintEnd_toEndOf="parent"
-                motion:layout_constraintTop_toTopOf="@+id/expanded_nested_guide"
-                motion:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/expanded_nested_guide"
+                app:layout_constraintBottom_toBottomOf="parent"
                 android:elevation="1dp"
                 android:background="@android:color/white"/>
 
@@ -48,10 +65,26 @@
                 android:id="@+id/expanded_background_guide"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
-                motion:layout_constraintStart_toStartOf="parent"
-                motion:layout_constraintEnd_toEndOf="parent"
-                motion:layout_constraintTop_toTopOf="parent"
-                motion:layout_constraintBottom_toTopOf="@+id/collapsed_background_guide"/>
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toTopOf="@+id/collapsed_background_guide"/>
+
+        <Constraint
+                android:id="@+id/cardView"
+                android:layout_width="0dp"
+                android:layout_height="48dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/collapsed_background_guide">
+            <CustomAttribute
+                    app:attributeName="radius"
+                    app:customFloatValue="0"/>
+
+
+        </Constraint>
 
         <Constraint
                 android:id="@+id/nested"
@@ -62,10 +95,10 @@
                 android:layout_marginBottom="16dp"
                 android:layout_marginEnd="16dp"
                 android:elevation="1dp"
-                motion:layout_constraintStart_toStartOf="parent"
-                motion:layout_constraintEnd_toEndOf="parent"
-                motion:layout_constraintTop_toTopOf="parent"
-                motion:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
                 android:background="@android:color/white"/>
 
     </ConstraintSet>
