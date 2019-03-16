@@ -59,4 +59,23 @@
     <string name="trial_detail_associated_disease_button">See All</string>
     <string name="trial_detail_associated_genes_title">Associated Gene Mutations</string>
 
+    <!--// associated Disease Filter-->
+    <string-array name="associateDiseaseFilter">
+        <item>negative test result</item>
+        <item>disorder by site</item>
+        <item>neoplasm by site</item>
+        <item>sign or symptom</item>
+        <item>receptor status</item>
+        <item>other disease</item>
+        <item>clinical test result</item>
+        <item>cancer-related condition</item>
+        <item>sign</item>
+        <item>laboratory test result</item>
+        <item>disease, disorder or finding</item>
+        <item>other carcinoma</item>
+        <item>other neoplasm</item>
+        <item>finding</item>
+        <item>negative test result</item>
+    </string-array>
+
 </resources>

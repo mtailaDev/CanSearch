@@ -18,8 +18,12 @@ import kotlinx.android.synthetic.main.fragment_trial.*
 import kotlinx.android.synthetic.main.study_summary_compound.*
 import kotlinx.android.synthetic.main.trial_detail_bottom_sheet.*
 import kotlinx.android.synthetic.main.trials_summary_compound.*
+import java.util.*
+
 
 class TrialFragment : Fragment() {
+
+    // todo - view model business logic
 
     private lateinit var sheetBehavior: BottomSheetBehavior<FrameLayout>
     private lateinit var parentViewModel: TrialActivityViewModel
@@ -110,19 +114,42 @@ class TrialFragment : Fragment() {
         associatedBiomarkers: SearchScreen.SearchResult.AssociatedBiomarkers?,
         associatedDiseases: SearchScreen.SearchResult.AssociatedDiseases
     ) {
+        val filteredArray = resources.getStringArray(com.example.cansearch.R.array.associateDiseaseFilter)
+        var itemsToBeDeleted = mutableListOf<SearchScreen.SearchResult.AssociatedDiseases.Disease>()
+        var filteredAssociatedDisease = associatedDiseases.associatedDiseases.toMutableList()
+        filteredAssociatedDisease.forEach { disease ->
+            filteredArray.forEach {
+                if (disease.title.toLowerCase().contains(it)) {
+                    itemsToBeDeleted.add(disease)
+                }
+            }
+        }
+        filteredAssociatedDisease.removeAll(itemsToBeDeleted)
+
         if (associatedBiomarkers?.biomarkers != null) {
             fullDiseaseExtras.addAll(associatedBiomarkers.biomarkers)
-            // todo - filter common diseases
-            fullDiseaseExtras.addAll(associatedDiseases.associatedDiseases)
+            fullDiseaseExtras.addAll(filteredAssociatedDisease)
             fullDiseaseExtras.shuffle()
-
             if (fullDiseaseExtras.size > 10) {
-                trimmedDiseaseExtras = fullDiseaseExtras.subList(0, 10)
+                trimmedDiseaseExtras = filteredAssociatedDisease.subList(0, 10)
                 trial_associated_genes.setData(trimmedDiseaseExtras)
             } else {
                 trial_associated_genes.setData(fullDiseaseExtras)
             }
-        } else trial_associated_genes.gone()
+        } else {
+            if (associatedDiseases.associatedDiseases.isNotEmpty()) {
+                fullDiseaseExtras.addAll(filteredAssociatedDisease)
+                fullDiseaseExtras.shuffle()
+                if (filteredAssociatedDisease.size > 10){
+                    trimmedDiseaseExtras = filteredAssociatedDisease.subList(0, 10)
+                    trial_associated_genes.setData(trimmedDiseaseExtras)
+                } else {
+                    trial_associated_genes.setData(fullDiseaseExtras)
+                }
+            } else {
+                trial_associated_genes.gone()
+            }
+        }
     }
 
     private fun showEligibilityCriteria(eligibility: SearchScreen.SearchResult.EligibilityCriteria) {
