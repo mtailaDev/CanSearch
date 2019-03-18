@@ -20,7 +20,7 @@ class HomeActivity : AppCompatActivity() {
 
     fun showTrial(selectedTrial: SearchScreen.SearchResult) {
         val intent = Intent(this, TrialActivity::class.java)
-        intent.putExtra("Test", selectedTrial)
+        intent.putExtra("Test", selectedTrial.id)
         startActivity(intent)
     }
 }

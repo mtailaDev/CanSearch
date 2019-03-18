@@ -9,6 +9,8 @@ import kotlinx.android.parcel.Parcelize
 
 data class SearchScreen(val totalResults: Int, val searchResults: List<SearchResult>) {
 
+    // todo - get rid of parcelize
+
     @Parcelize
     data class SearchResult(
         val id: String,
