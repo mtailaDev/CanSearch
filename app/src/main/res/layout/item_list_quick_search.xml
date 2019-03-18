@@ -7,25 +7,18 @@
         android:clickable="true"
         android:focusable="true">
 
-    <TextView
-            android:id="@+id/quick_search_title"
-            android:layout_width="wrap_content"
+    <com.google.android.material.chip.ChipGroup
+            android:id="@+id/quickSearchChipGroup"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:layout_marginTop="8dp"
-            android:layout_marginStart="16dp" android:fontFamily="@font/sanchez"/>
-
-    <View
-            android:id="@+id/quick_search_line_break"
-            android:layout_width="0dp"
-            android:layout_height="1dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/quick_search_title"
-            android:background="@color/line_break"
             android:layout_marginStart="16dp"
             android:layout_marginEnd="16dp"
-            android:layout_marginTop="8dp"/>
+            android:layout_marginTop="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:chipSpacing="8dp">
+
+    </com.google.android.material.chip.ChipGroup>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -2,6 +2,7 @@ package com.example.cansearch.search.ui.screens
 
 import android.annotation.SuppressLint
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -17,21 +18,38 @@ import com.example.cansearch.search.di.SearchDagger
 import com.example.cansearch.search.domain.SearchScreen
 import com.example.cansearch.search.ui.adapters.QuickSearchAdapter
 import com.example.cansearch.search.ui.adapters.SearchResultsAdapter
+import com.example.cansearch.search.ui.model.QuickSearch
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.fragment_search.*
 import javax.inject.Inject
 
-class SearchFragment : Fragment(), SearchResultsAdapter.onArchiveClickHandler {
+class SearchFragment : Fragment(), SearchResultsAdapter.onArchiveClickHandler,
+    QuickSearchAdapter.OnChipSelectedListener {
 
     private lateinit var viewModel: SearchFragmentViewModel
     @Inject
     lateinit var viewModelFactory: SearchFragmentViewModelFactory
+    private val quickSearchList = mutableListOf<String>()
 
     @SuppressLint("CheckResult")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         SearchDagger.component.inject(this)
         viewModel = ViewModelProviders.of(this, viewModelFactory)[SearchFragmentViewModel::class.java]
+    }
+
+    override fun onChipSelected(title: String) {
+        quickSearchList.add(title)
+        quickSearchList.forEach {
+            Log.i("LIST", it)
+        }
+    }
+
+    override fun onChipDeselected(title: String) {
+        quickSearchList.remove(title)
+        quickSearchList.forEach {
+            Log.i("LIST", it)
+        }
     }
 
     override fun onArchive(): Boolean {
@@ -70,20 +88,11 @@ class SearchFragment : Fragment(), SearchResultsAdapter.onArchiveClickHandler {
 
     private fun setupQuickSearchRecyclerView() {
         val stringArray = resources.getStringArray(R.array.quickSearch)
-        search_rv_quick_search.adapter =
-            QuickSearchAdapter(stringArray.toList())
+        search_rv_quick_search.adapter = QuickSearchAdapter(QuickSearch(stringArray.toList()), this)
         search_rv_quick_search.layoutManager = LinearLayoutManager(context)
     }
 
     private fun setOnClickListeners() {
-        search_iv_icon.setOnClickListener {
-            if (!search_et_value.text.toString().isNullOrEmpty()) {
-//                showSearchingStatus()
-
-            } else {
-                showErrorMessage(it)
-            }
-        }
         search_btn.setOnClickListener {
             if (!search_et_value.text.toString().isNullOrEmpty()) {
 //                showSearchingStatus()
@@ -92,34 +101,6 @@ class SearchFragment : Fragment(), SearchResultsAdapter.onArchiveClickHandler {
             }
         }
     }
-
-//    // todo - clean this up
-//    private fun showSearchingStatus() {
-//        search_tv_results_title.text = resources.getString(R.string.search_status_searching)
-//        search_rv_quick_search.gone()
-//        search_btn.gone()
-//        search_lottie_searching.visible()
-//        search_lottie_searching.elevation = 3f
-//        // maybe a bit hacky - but use this to prevent
-//        search_lottie_searching.setOnTouchListener { v, event ->
-//            return@setOnTouchListener true
-//        }
-//        Single.just(Any())
-//            .delay(5, TimeUnit.SECONDS)
-//            .subscribeOn(Schedulers.io())
-//            .observeOn(AndroidSchedulers.mainThread())
-//            .doOnSuccess {
-//                search_tv_results_title.text = resources.getString(R.string.search_status_results)
-//                search_lottie_searching.gone()
-//                search_rv_quick_search.visible()
-//                search_btn.visible()
-////                search_rv_quick_search.adapter =
-////                    SearchResultsAdapter(resources.getStringArray(R.array.quickSearch).toList())
-////                search_rv_quick_search.layoutManager = LinearLayoutManager(context)
-//            }
-////            .subscribe()
-//
-//    }
 
     private fun showErrorMessage(view: View) {
         Snackbar.make(view, "Please provide a search value in the search box", Snackbar.LENGTH_SHORT).show()
