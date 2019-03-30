@@ -26,9 +26,9 @@ class TrialActivity : AppCompatActivity() {
         viewModel.selectedTrialActivityID.value = selectedTrial
 
         viewModel.selectedTrial.observe(this, Observer { searchScreenResults ->
-            val ft = supportFragmentManager.beginTransaction()
-            ft.replace(R.id.fragment, TrialFragment.newInstance())
-            ft.commit()
+//            val ft = supportFragmentManager.beginTransaction()
+//            ft.replace(R.id.fragment, TrialFragment.newInstance())
+//            ft.commit()
         })
         viewModel.getSearch()
     }

@@ -9,11 +9,11 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.cansearch.R
 import com.example.cansearch.core.gone
 import com.example.cansearch.core.visible
-import com.example.cansearch.home.HomeActivity
 import com.example.cansearch.search.di.SearchDagger
 import com.example.cansearch.search.domain.SearchScreen
 import com.example.cansearch.search.ui.adapters.QuickSearchAdapter
@@ -23,7 +23,7 @@ import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.fragment_search.*
 import javax.inject.Inject
 
-class SearchFragment : Fragment(), SearchResultsAdapter.onArchiveClickHandler,
+class SearchFragment : Fragment(), SearchResultsAdapter.OnTrialSelectedListener,
     QuickSearchAdapter.OnChipSelectedListener {
 
     private lateinit var viewModel: SearchFragmentViewModel
@@ -56,11 +56,8 @@ class SearchFragment : Fragment(), SearchResultsAdapter.onArchiveClickHandler,
         return true
     }
 
-    // todo clean this
     override fun onTrialSelected(selectedTrial: SearchScreen.SearchResult) {
-
-        val x = activity as HomeActivity
-        x.showTrial(selectedTrial)
+        this@SearchFragment.findNavController().navigate(R.id.action_searchFragment_to_trialFragment)
     }
 
     private fun showResultsRecyclerView(trials: List<SearchScreen.SearchResult>) {
@@ -68,7 +65,6 @@ class SearchFragment : Fragment(), SearchResultsAdapter.onArchiveClickHandler,
         search_rv_quick_search.visible()
         search_rv_quick_search.adapter = SearchResultsAdapter(trials, this)
         search_rv_quick_search.layoutManager = LinearLayoutManager(context)
-
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {

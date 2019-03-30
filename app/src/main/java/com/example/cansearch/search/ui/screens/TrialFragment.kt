@@ -33,10 +33,10 @@ class TrialFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        activity.let {
-            parentViewModel = ViewModelProviders.of(it!!)[TrialActivityViewModel::class.java]
-            selectedTrial = parentViewModel.selectedTrial.value!!
-        }
+//        activity.let {
+//            parentViewModel = ViewModelProviders.of(it!!)[TrialActivityViewModel::class.java]
+//            selectedTrial = parentViewModel.selectedTrial.value!!
+//        }
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -45,15 +45,15 @@ class TrialFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        setTitle(selectedTrial.studySummary)
-        showStudySummary(selectedTrial.studySummary)
-        showTrialSummary(selectedTrial.trialSummary, selectedTrial.sites)
-        showEligibilityCriteria(selectedTrial.eligibility)
-        showDiseaseExtras(selectedTrial.associatedBiomarkers, selectedTrial.associatedDiseases)
+//        setTitle(selectedTrial.studySummary)
+//        showStudySummary(selectedTrial.studySummary)
+//        showTrialSummary(selectedTrial.trialSummary, selectedTrial.sites)
+//        showEligibilityCriteria(selectedTrial.eligibility)
+//        showDiseaseExtras(selectedTrial.associatedBiomarkers, selectedTrial.associatedDiseases)
 
-        sheetBehavior = BottomSheetBehavior.from<FrameLayout>(bottom_sheet)
-        setBottomSheetListener()
-        setOnClickListeners()
+//        sheetBehavior = BottomSheetBehavior.from<FrameLayout>(bottom_sheet)
+//        setBottomSheetListener()
+//        setOnClickListeners()
     }
 
     private fun setTitle(studySummary: SearchScreen.SearchResult.StudySummary) {
@@ -162,11 +162,11 @@ class TrialFragment : Fragment() {
         trial_study.setData(studySummary)
     }
 
-    companion object {
-        @JvmStatic
-        fun newInstance(): TrialFragment {
-            return TrialFragment()
-        }
-    }
+//    companion object {
+//        @JvmStatic
+//        fun newInstance(): TrialFragment {
+//            return TrialFragment()
+//        }
+//    }
 }
 
