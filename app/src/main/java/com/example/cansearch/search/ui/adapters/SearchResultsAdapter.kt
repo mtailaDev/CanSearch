@@ -17,7 +17,7 @@ import kotlinx.android.synthetic.main.item_list_search.view.*
 
 class SearchResultsAdapter(
     private val searchResults: List<SearchScreen.SearchResult>,
-    private var archiveListener: onArchiveClickHandler
+    private var trialSelectedListener: OnTrialSelectedListener
 ) :
     RecyclerView.Adapter<SearchResultsAdapter.ViewHolder>() {
 
@@ -30,12 +30,13 @@ class SearchResultsAdapter(
     override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {
         viewHolder.setData(SearchResultSummary.mapFromSearchResult(searchResults[position]))
 
-        viewHolder.itemView.search_results_parent.setOnClickListener {
-            archiveListener.onTrialSelected(searchResults[position])
+        val container = viewHolder.itemView.search_results_parent
+        container.setOnClickListener {
+            trialSelectedListener.onTrialSelected(searchResults[position])
         }
 
         viewHolder.itemView.search_result_archive_icon.setOnClickListener {
-            val x = archiveListener.onArchive()
+            val x = trialSelectedListener.onArchive()
 
             val popAnimationY =
                 ObjectAnimator.ofFloat(viewHolder.itemView.search_result_archive_icon, View.SCALE_Y, 1f, 1.5f)
@@ -88,7 +89,7 @@ class SearchResultsAdapter(
     }
 
     // todo - rename this
-    interface onArchiveClickHandler {
+    interface OnTrialSelectedListener {
         fun onArchive(): Boolean
         fun onTrialSelected(selectedTrial: SearchScreen.SearchResult)
     }
