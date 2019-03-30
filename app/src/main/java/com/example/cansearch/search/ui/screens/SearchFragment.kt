@@ -57,7 +57,9 @@ class SearchFragment : Fragment(), SearchResultsAdapter.OnTrialSelectedListener,
     }
 
     override fun onTrialSelected(selectedTrial: SearchScreen.SearchResult) {
-        this@SearchFragment.findNavController().navigate(R.id.action_searchFragment_to_trialFragment)
+        Log.i("ID pre", selectedTrial.id)
+        val action = SearchFragmentDirections.actionSearchFragmentToTrialFragment(selectedTrial.id)
+        this@SearchFragment.findNavController().navigate(action)
     }
 
     private fun showResultsRecyclerView(trials: List<SearchScreen.SearchResult>) {
