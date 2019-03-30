@@ -58,6 +58,7 @@
     <string name="trial_detail_associated_disease_title">Associated Diseases</string>
     <string name="trial_detail_associated_disease_button">See All</string>
     <string name="trial_detail_associated_genes_title">Associated Gene Mutations</string>
+    <string name="scientific_detail_title">Scientific Summary</string>
 
     <!--// associated Disease Filter-->
     <string-array name="associateDiseaseFilter">

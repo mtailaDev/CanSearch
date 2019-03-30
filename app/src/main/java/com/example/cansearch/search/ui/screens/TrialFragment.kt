@@ -69,7 +69,7 @@ class TrialFragment : Fragment() {
 
     private fun setBottomSheetListener() {
         sheetBehavior.setBottomSheetCallback(object : BottomSheetBehavior.BottomSheetCallback() {
-            override fun onSlide(p0: View, p1: Float) {
+            override fun onSlide(p0: View, slideOffset: Float) {
             }
 
             override fun onStateChanged(p0: View, newState: Int) {
@@ -88,7 +88,6 @@ class TrialFragment : Fragment() {
 
     private fun setOnClickListeners() {
         study_summary_scientific_detail_btn.setOnClickListener {
-            scientific_title.text = selectedTrial.studySummary.scientificTitle
             scientific_description.text = selectedTrial.studySummary.scientificDescription
             sheetBehavior.state = BottomSheetBehavior.STATE_EXPANDED
         }
@@ -107,6 +106,9 @@ class TrialFragment : Fragment() {
                 trial_associated_genes.setData(fullDiseaseExtras)
                 disease_extra_show_more.rotation = -90f
             }
+        }
+        scientific_back_arrow.setOnClickListener {
+            sheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
         }
     }
 
