@@ -30,12 +30,12 @@ class HomeActivity : AppCompatActivity() {
         val nav = Navigation.findNavController(this, R.id.nav_host_fragment)
         nav.addOnDestinationChangedListener { _, destination, _ ->
             when (destination.id) {
-                R.id.archiveFragment,
                 R.id.trialFragment -> {
                     animateDownBottomNav()
                     bottomNavEnabled = false
                 }
                 R.id.searchFragment,
+                R.id.archiveFragment,
                 R.id.settingsFragment -> {
                     if (!bottomNavEnabled) {
                         animateUpBottomNav()
