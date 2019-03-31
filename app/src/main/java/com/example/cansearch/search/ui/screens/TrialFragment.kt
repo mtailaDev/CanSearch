@@ -5,12 +5,16 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.AccelerateDecelerateInterpolator
 import android.widget.FrameLayout
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.navArgs
+import androidx.transition.ChangeBounds
+import androidx.transition.Fade
+import androidx.transition.TransitionManager
 import com.example.cansearch.R
 import com.example.cansearch.core.gone
 import com.example.cansearch.core.visible
@@ -51,7 +55,21 @@ class TrialFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        val changeBoundsTransition = ChangeBounds()
+        changeBoundsTransition.duration = 200
+        changeBoundsTransition.interpolator = AccelerateDecelerateInterpolator()
+
+        val fadeTransition = Fade()
+        changeBoundsTransition.duration = 200
+        changeBoundsTransition.interpolator = AccelerateDecelerateInterpolator()
+        TransitionManager.beginDelayedTransition(parent_container, changeBoundsTransition)
+        TransitionManager.beginDelayedTransition(parent_container, fadeTransition)
+        resetViews()
+
         viewModel.selectedTrial.observe(this, Observer {
+            TransitionManager.beginDelayedTransition(parent_container, changeBoundsTransition)
+            TransitionManager.beginDelayedTransition(parent_container, fadeTransition)
             setTitle(it.studySummary)
             showStudySummary(it.studySummary)
             showTrialSummary(it.trialSummary, it.sites)
@@ -69,6 +87,11 @@ class TrialFragment : Fragment() {
             setOnClickListeners()
         })
         viewModel.getSearch()
+    }
+
+    private fun resetViews() {
+        trial_name_value.text = ""
+        trial_study.resetData()
     }
 
     private fun setTitle(studySummary: StudySummary) {
@@ -129,7 +152,6 @@ class TrialFragment : Fragment() {
             it.findNavController().popBackStack()
         }
     }
-
 
 
     private fun showEligibilityCriteria(eligibility: EligibilityCriteria) {
