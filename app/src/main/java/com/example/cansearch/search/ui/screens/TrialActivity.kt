@@ -10,27 +10,9 @@ import javax.inject.Inject
 
 class TrialActivity : AppCompatActivity() {
 
-    private lateinit var viewModel: TrialActivityViewModel
-    @Inject
-    lateinit var viewModelFactory: TrialActivityViewModelFactory
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_trial)
-        SearchDagger.component.inject(this)
-
-        viewModel = ViewModelProviders.of(this, viewModelFactory)[TrialActivityViewModel::class.java]
-
-        // todo - clean this
-        val selectedTrial = intent.getStringExtra("Test")
-        viewModel.selectedTrialActivityID.value = selectedTrial
-
-        viewModel.selectedTrial.observe(this, Observer { searchScreenResults ->
-//            val ft = supportFragmentManager.beginTransaction()
-//            ft.replace(R.id.fragment, TrialFragment.newInstance())
-//            ft.commit()
-        })
-        viewModel.getSearch()
     }
 
     fun showLocation() {

@@ -6,11 +6,11 @@ import com.example.cansearch.search.domain.FetchSearchUseCase
 import com.example.cansearch.search.domain.GetSearchUseCase
 import javax.inject.Inject
 
-class TrialActivityViewModelFactory @Inject constructor(
+class TrialFragmentViewModelFactory @Inject constructor(
     private val getSearchUseCases: GetSearchUseCase,
     private val fetchSearchUseCase: FetchSearchUseCase
 ) : ViewModelProvider.NewInstanceFactory() {
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-        return TrialActivityViewModel(getSearchUseCases, fetchSearchUseCase) as T
+        return TrialFragmentViewModel(getSearchUseCases, fetchSearchUseCase) as T
     }
 }

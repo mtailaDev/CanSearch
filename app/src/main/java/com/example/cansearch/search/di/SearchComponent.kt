@@ -3,6 +3,7 @@ package com.example.cansearch.search.di
 import com.example.cansearch.core.di.AppComponent
 import com.example.cansearch.search.ui.screens.SearchFragment
 import com.example.cansearch.search.ui.screens.TrialActivity
+import com.example.cansearch.search.ui.screens.TrialFragment
 import dagger.Component
 
 @Search
@@ -10,7 +11,7 @@ import dagger.Component
 interface SearchComponent {
 
     fun inject(searchFragment: SearchFragment)
-    fun inject(trialActivity: TrialActivity)
+    fun inject(trialActivity: TrialFragment)
 
     @Component.Builder
     interface Builder {

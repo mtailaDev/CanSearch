@@ -1,42 +1,54 @@
 package com.example.cansearch.search.ui.screens
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.FrameLayout
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import androidx.navigation.fragment.navArgs
 import com.example.cansearch.R
 import com.example.cansearch.core.gone
 import com.example.cansearch.core.visible
+import com.example.cansearch.search.di.SearchDagger
 import com.example.cansearch.search.domain.DiseaseExtras
-import com.example.cansearch.search.domain.SearchScreen
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import kotlinx.android.synthetic.main.associated_disease_info_compound.*
 import kotlinx.android.synthetic.main.fragment_trial.*
 import kotlinx.android.synthetic.main.study_summary_compound.*
 import kotlinx.android.synthetic.main.trial_detail_bottom_sheet.*
 import kotlinx.android.synthetic.main.trials_summary_compound.*
+import com.example.cansearch.search.domain.SearchScreen.SearchResult.StudySummary
+import com.example.cansearch.search.domain.SearchScreen.SearchResult.TrialSummary
+import com.example.cansearch.search.domain.SearchScreen.SearchResult.Sites
+import com.example.cansearch.search.domain.SearchScreen.SearchResult.EligibilityCriteria
 import java.util.*
+import javax.inject.Inject
 
 
 class TrialFragment : Fragment() {
 
-    // todo - view model business logic
+    // nav args
+    val args: TrialFragmentArgs by navArgs()
+
+    // view models
+    private lateinit var viewModel: TrialFragmentViewModel
+    @Inject
+    lateinit var viewModelFactory: TrialFragmentViewModelFactory
+
 
     private lateinit var sheetBehavior: BottomSheetBehavior<FrameLayout>
-    private lateinit var parentViewModel: TrialActivityViewModel
-    private lateinit var selectedTrial: SearchScreen.SearchResult
     private var fullDiseaseExtras = ArrayList<DiseaseExtras>()
     private var trimmedDiseaseExtras = emptyList<DiseaseExtras>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-//        activity.let {
-//            parentViewModel = ViewModelProviders.of(it!!)[TrialActivityViewModel::class.java]
-//            selectedTrial = parentViewModel.selectedTrial.value!!
-//        }
+        SearchDagger.component.inject(this)
+        viewModel = ViewModelProviders.of(activity!!, viewModelFactory)[TrialFragmentViewModel::class.java]
+        viewModel.selectedTrialActivityID.value = args.studyId
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -45,25 +57,28 @@ class TrialFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-//        setTitle(selectedTrial.studySummary)
-//        showStudySummary(selectedTrial.studySummary)
-//        showTrialSummary(selectedTrial.trialSummary, selectedTrial.sites)
-//        showEligibilityCriteria(selectedTrial.eligibility)
-//        showDiseaseExtras(selectedTrial.associatedBiomarkers, selectedTrial.associatedDiseases)
-
-//        sheetBehavior = BottomSheetBehavior.from<FrameLayout>(bottom_sheet)
-//        setBottomSheetListener()
-//        setOnClickListeners()
+        viewModel.selectedTrial.observe(this, Observer {
+            setTitle(it.studySummary)
+            showStudySummary(it.studySummary)
+            showTrialSummary(it.trialSummary, it.sites)
+            showEligibilityCriteria(it.eligibility)
+            trial_associated_genes.setData(viewModel.filterAssociatedDiseaseInfo(
+                resources.getStringArray(com.example.cansearch.R.array.associateDiseaseFilter),
+                it.associatedDiseases,
+                it.associatedBiomarkers))
+            scientific_description.text = it.studySummary.scientificDescription
+            sheetBehavior = BottomSheetBehavior.from<FrameLayout>(bottom_sheet)
+            setBottomSheetListener()
+            setOnClickListeners()
+        })
+        viewModel.getSearch()
     }
 
-    private fun setTitle(studySummary: SearchScreen.SearchResult.StudySummary) {
+    private fun setTitle(studySummary: StudySummary) {
         trial_name_value.text = studySummary.briefTitle
     }
 
-    private fun showTrialSummary(
-        trialSummary: SearchScreen.SearchResult.TrialSummary,
-        sites: SearchScreen.SearchResult.Sites
-    ) {
+    private fun showTrialSummary(trialSummary: TrialSummary, sites: Sites) {
         trial_summary.setData(trialSummary)
     }
 
@@ -72,6 +87,7 @@ class TrialFragment : Fragment() {
             override fun onSlide(p0: View, slideOffset: Float) {
             }
 
+            @SuppressLint("SwitchIntDef")
             override fun onStateChanged(p0: View, newState: Int) {
                 when (newState) {
                     BottomSheetBehavior.STATE_SETTLING,
@@ -81,6 +97,9 @@ class TrialFragment : Fragment() {
                     BottomSheetBehavior.STATE_COLLAPSED -> {
                         background.gone()
                     }
+                    else -> {
+                        // do nothing
+                    }
                 }
             }
         })
@@ -88,7 +107,6 @@ class TrialFragment : Fragment() {
 
     private fun setOnClickListeners() {
         study_summary_scientific_detail_btn.setOnClickListener {
-            scientific_description.text = selectedTrial.studySummary.scientificDescription
             sheetBehavior.state = BottomSheetBehavior.STATE_EXPANDED
         }
         trial_summary_locations_btn.setOnClickListener {
@@ -99,11 +117,11 @@ class TrialFragment : Fragment() {
             trial_associated_genes.clearChipGroup()
             if (trial_associated_genes.diseaseExtraExpanded) {
                 trial_associated_genes.diseaseExtraExpanded = false
-                trial_associated_genes.setData(trimmedDiseaseExtras)
+                trial_associated_genes.setData(viewModel.getTrimmedDiseaseInfoList())
                 disease_extra_show_more.rotation = 90f
             } else {
                 trial_associated_genes.diseaseExtraExpanded = true
-                trial_associated_genes.setData(fullDiseaseExtras)
+                trial_associated_genes.setData(viewModel.getFullDiseaseInfoList())
                 disease_extra_show_more.rotation = -90f
             }
         }
@@ -112,61 +130,14 @@ class TrialFragment : Fragment() {
         }
     }
 
-    private fun showDiseaseExtras(
-        associatedBiomarkers: SearchScreen.SearchResult.AssociatedBiomarkers?,
-        associatedDiseases: SearchScreen.SearchResult.AssociatedDiseases
-    ) {
-        val filteredArray = resources.getStringArray(com.example.cansearch.R.array.associateDiseaseFilter)
-        var itemsToBeDeleted = mutableListOf<SearchScreen.SearchResult.AssociatedDiseases.Disease>()
-        var filteredAssociatedDisease = associatedDiseases.associatedDiseases.toMutableList()
-        filteredAssociatedDisease.forEach { disease ->
-            filteredArray.forEach {
-                if (disease.title.toLowerCase().contains(it)) {
-                    itemsToBeDeleted.add(disease)
-                }
-            }
-        }
-        filteredAssociatedDisease.removeAll(itemsToBeDeleted)
 
-        if (associatedBiomarkers?.biomarkers != null) {
-            fullDiseaseExtras.addAll(associatedBiomarkers.biomarkers)
-            fullDiseaseExtras.addAll(filteredAssociatedDisease)
-            fullDiseaseExtras.shuffle()
-            if (fullDiseaseExtras.size > 10) {
-                trimmedDiseaseExtras = filteredAssociatedDisease.subList(0, 10)
-                trial_associated_genes.setData(trimmedDiseaseExtras)
-            } else {
-                trial_associated_genes.setData(fullDiseaseExtras)
-            }
-        } else {
-            if (associatedDiseases.associatedDiseases.isNotEmpty()) {
-                fullDiseaseExtras.addAll(filteredAssociatedDisease)
-                fullDiseaseExtras.shuffle()
-                if (filteredAssociatedDisease.size > 10){
-                    trimmedDiseaseExtras = filteredAssociatedDisease.subList(0, 10)
-                    trial_associated_genes.setData(trimmedDiseaseExtras)
-                } else {
-                    trial_associated_genes.setData(fullDiseaseExtras)
-                }
-            } else {
-                trial_associated_genes.gone()
-            }
-        }
-    }
 
-    private fun showEligibilityCriteria(eligibility: SearchScreen.SearchResult.EligibilityCriteria) {
+    private fun showEligibilityCriteria(eligibility: EligibilityCriteria) {
         trial_eligibility.showData(eligibility)
     }
 
-    private fun showStudySummary(studySummary: SearchScreen.SearchResult.StudySummary) {
+    private fun showStudySummary(studySummary: StudySummary) {
         trial_study.setData(studySummary)
     }
-
-//    companion object {
-//        @JvmStatic
-//        fun newInstance(): TrialFragment {
-//            return TrialFragment()
-//        }
-//    }
 }
 
