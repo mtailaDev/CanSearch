@@ -18,7 +18,7 @@ import kotlinx.android.synthetic.main.fragment_site_location.*
 
 class SiteLocationFragment : Fragment() {
 
-    private lateinit var parentViewModel: TrialActivityViewModel
+    private lateinit var parentViewModel: TrialFragmentViewModel
     private lateinit var siteLocationViewModel: SiteLocationViewModel
     private lateinit var selectedTrial: SearchScreen.SearchResult
     private lateinit var adapter: LocationsAdapter
@@ -26,7 +26,7 @@ class SiteLocationFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         activity.let {
-            parentViewModel = ViewModelProviders.of(it!!)[TrialActivityViewModel::class.java]
+            parentViewModel = ViewModelProviders.of(it!!)[TrialFragmentViewModel::class.java]
             selectedTrial = parentViewModel.selectedTrial.value!!
         }
         siteLocationViewModel = ViewModelProviders.of(this)[SiteLocationViewModel::class.java]

@@ -57,7 +57,7 @@ class SearchFragment : Fragment(), SearchResultsAdapter.OnTrialSelectedListener,
     }
 
     override fun onTrialSelected(selectedTrial: SearchScreen.SearchResult) {
-        Log.i("ID pre", selectedTrial.id)
+        Log.i("Sent IDID", selectedTrial.id)
         val action = SearchFragmentDirections.actionSearchFragmentToTrialFragment(selectedTrial.id)
         this@SearchFragment.findNavController().navigate(action)
     }
