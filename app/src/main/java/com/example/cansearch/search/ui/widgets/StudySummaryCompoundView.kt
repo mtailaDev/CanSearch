@@ -7,7 +7,12 @@ import com.example.cansearch.R
 import com.example.cansearch.search.domain.SearchScreen
 import kotlinx.android.synthetic.main.study_summary_compound.view.*
 
-class StudySummaryCompoundView @JvmOverloads constructor(context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0) :
+
+class StudySummaryCompoundView @JvmOverloads constructor(
+    context: Context,
+    attrs: AttributeSet? = null,
+    defStyleAttr: Int = 0
+) :
     ConstraintLayout(context, attrs, defStyleAttr) {
 
     init {
@@ -16,5 +21,9 @@ class StudySummaryCompoundView @JvmOverloads constructor(context: Context, attrs
 
     fun setData(studySummary: SearchScreen.SearchResult.StudySummary) {
         study_summary_description.text = studySummary.briefDescription
+    }
+
+    fun resetData(){
+        study_summary_description.text = ""
     }
 }
