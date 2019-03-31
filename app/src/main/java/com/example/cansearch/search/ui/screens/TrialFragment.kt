@@ -9,23 +9,19 @@ import android.widget.FrameLayout
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import androidx.navigation.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.cansearch.R
 import com.example.cansearch.core.gone
 import com.example.cansearch.core.visible
 import com.example.cansearch.search.di.SearchDagger
-import com.example.cansearch.search.domain.DiseaseExtras
+import com.example.cansearch.search.domain.SearchScreen.SearchResult.*
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import kotlinx.android.synthetic.main.associated_disease_info_compound.*
 import kotlinx.android.synthetic.main.fragment_trial.*
 import kotlinx.android.synthetic.main.study_summary_compound.*
 import kotlinx.android.synthetic.main.trial_detail_bottom_sheet.*
 import kotlinx.android.synthetic.main.trials_summary_compound.*
-import com.example.cansearch.search.domain.SearchScreen.SearchResult.StudySummary
-import com.example.cansearch.search.domain.SearchScreen.SearchResult.TrialSummary
-import com.example.cansearch.search.domain.SearchScreen.SearchResult.Sites
-import com.example.cansearch.search.domain.SearchScreen.SearchResult.EligibilityCriteria
-import java.util.*
 import javax.inject.Inject
 
 
@@ -39,10 +35,8 @@ class TrialFragment : Fragment() {
     @Inject
     lateinit var viewModelFactory: TrialFragmentViewModelFactory
 
-
+    // views
     private lateinit var sheetBehavior: BottomSheetBehavior<FrameLayout>
-    private var fullDiseaseExtras = ArrayList<DiseaseExtras>()
-    private var trimmedDiseaseExtras = emptyList<DiseaseExtras>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -62,10 +56,13 @@ class TrialFragment : Fragment() {
             showStudySummary(it.studySummary)
             showTrialSummary(it.trialSummary, it.sites)
             showEligibilityCriteria(it.eligibility)
-            trial_associated_genes.setData(viewModel.filterAssociatedDiseaseInfo(
-                resources.getStringArray(com.example.cansearch.R.array.associateDiseaseFilter),
-                it.associatedDiseases,
-                it.associatedBiomarkers))
+            trial_associated_genes.setData(
+                viewModel.filterAssociatedDiseaseInfo(
+                    resources.getStringArray(com.example.cansearch.R.array.associateDiseaseFilter),
+                    it.associatedDiseases,
+                    it.associatedBiomarkers
+                )
+            )
             scientific_description.text = it.studySummary.scientificDescription
             sheetBehavior = BottomSheetBehavior.from<FrameLayout>(bottom_sheet)
             setBottomSheetListener()
@@ -127,6 +124,9 @@ class TrialFragment : Fragment() {
         }
         scientific_back_arrow.setOnClickListener {
             sheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
+        }
+        trial_back.setOnClickListener {
+            it.findNavController().popBackStack()
         }
     }
 
